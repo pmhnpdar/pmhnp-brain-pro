@@ -729,10 +729,10 @@ select.form-control { cursor: pointer; }
     </div>
     <div class="nav-group">
       <div class="nav-group-label">Prescribing</div>
-      <div class="nav-item" data-page="page-meds" onclick="showPage('page-meds',this)">
+      <div class="nav-item" data-page="page-meds" onclick="showPage('page-medications',this)">
         <i class="fas fa-pills"></i> Medications
       </div>
-      <div class="nav-item" data-page="page-cyp" onclick="showPage('page-cyp',this)">
+      <div class="nav-item" data-page="page-cyp" onclick="showPage('page-cyp450',this)">
         <i class="fas fa-atom"></i> CYP450
       </div>
     </div>
@@ -747,13 +747,13 @@ select.form-control { cursor: pointer; }
       <div class="nav-item" data-page="page-integrative" onclick="showPage('page-integrative',this)">
         <i class="fas fa-leaf"></i> Integrative
       </div>
-      <div class="nav-item" data-page="page-neuro" onclick="showPage('page-neuro',this)">
+      <div class="nav-item" data-page="page-neuro" onclick="showPage('page-neurotransmitters',this)">
         <i class="fas fa-wave-square"></i> Neurotransmitters
       </div>
     </div>
     <div class="nav-group">
       <div class="nav-group-label">Documentation</div>
-      <div class="nav-item" data-page="page-document" onclick="showPage('page-document',this)">
+      <div class="nav-item" data-page="page-documents" onclick="showPage('page-documents',this)">
         <i class="fas fa-file-medical"></i> Document Studio
       </div>
       <div class="nav-item" data-page="page-scales" onclick="showPage('page-scales',this)">
@@ -777,11 +777,11 @@ select.form-control { cursor: pointer; }
     <div class="hero-band-title">Good morning, Dara. Where do you want to start?</div>
     <div class="hero-band-sub">PMHNP Brain Pro — Psychiatric Clinical Decision Support OS · Psychiatry of the Palm Beaches</div>
     <div class="hero-actions">
-      <button class="hero-btn primary" onclick="showPage('page-document'); setDocEngine('eval')">
+      <button class="hero-btn primary" onclick="showPage('page-documents'); setDocEngine('eval')">
         <span class="btn-icon">🔍</span>
         <span class="btn-text">New Evaluation</span>
       </button>
-      <button class="hero-btn" onclick="showPage('page-document'); setDocEngine('followup')">
+      <button class="hero-btn" onclick="showPage('page-documents'); setDocEngine('followup')">
         <span class="btn-icon">📋</span>
         <span class="btn-text">Follow-Up Visit</span>
       </button>
@@ -793,7 +793,7 @@ select.form-control { cursor: pointer; }
         <span class="btn-icon">💊</span>
         <span class="btn-text">Med Chooser</span>
       </button>
-      <button class="hero-btn" onclick="showPage('page-document')">
+      <button class="hero-btn" onclick="showPage('page-documents')">
         <span class="btn-icon">📝</span>
         <span class="btn-text">Risk Statement</span>
       </button>
@@ -4520,7 +4520,7 @@ const MEDS = [
 // ── NAVIGATION ──────────────────────────────────────
 function showPage(id, navEl) {
   document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-  const page = document.getElementById('page-' + id);
+  const page = document.getElementById(id);
   if (page) page.style.display = 'block';
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (navEl) navEl.classList.add('active');
@@ -4574,7 +4574,7 @@ function showDisorder(id, btn) {
 
 function goToDisorder(id) {
   const treatNav = document.querySelector('[onclick*="treat"]');
-  showPage('treat', treatNav);
+  showPage('page-treat', treatNav);
   setTimeout(() => {
     const btn = document.querySelector('[onclick*="showDisorder(\'' + id + '\'"]');
     showDisorder(id, btn);
@@ -4583,7 +4583,7 @@ function goToDisorder(id) {
 
 function openDecisionTool() {
   const treatNav = document.querySelector('[onclick*="treat"]');
-  showPage('treat', treatNav);
+  showPage('page-treat', treatNav);
   setTimeout(() => {
     const tools = document.getElementById('decision-tools');
     if (tools) tools.scrollIntoView({ behavior: 'smooth' });
@@ -5391,6 +5391,10 @@ dtStyle.textContent = `
 .dt-run-btn { padding:0.55rem 1.25rem; background:var(--accent); color:#fff; border:none; border-radius:8px; font-size:0.88rem; font-weight:600; cursor:pointer; }
 `;
 document.head.appendChild(dtStyle);
+
+function setDocEngine(type) {
+  showSubtab('documents', type === 'eval' ? 'eval' : type === 'followup' ? 'followup' : type === 'formulation' ? 'formulation' : 'risk');
+}
 
 // ── INIT ──────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function() {
