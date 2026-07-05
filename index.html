@@ -730,6 +730,61 @@ body.light .cyp-enzyme-header h3 { color: #fff; }
 body.light .scale-container { background: var(--bg-card); }
 body.light .neuro-icon { background: rgba(0,0,0,0.15); }
 
+body.light .brand-name { color: #0f1a2e !important; }
+body.light .brand-name span { color: var(--accent) !important; }
+body.light .brand-sub { color: #3d4f6e !important; }
+body.light .nav-item { color: #3d4f6e; }
+body.light .nav-item.active { color: var(--accent); background: var(--accent-dim); }
+body.light .nav-item:hover { color: var(--accent); background: var(--accent-dim); }
+body.light .nav-section-label { color: #7a8aa8; }
+body.light .page-title { color: #0f1a2e; }
+body.light .page-subtitle { color: #3d4f6e; }
+body.light .card { background: #ffffff; border-color: rgba(0,0,0,0.08); }
+body.light .hero-band { background: linear-gradient(135deg, #1a3a5c 0%, #0d2240 100%); }
+body.light .hero-band-title, body.light .hero-band-sub { color: #fff !important; }
+body.light .kpi-bar { background: #eef2ff; border-color: rgba(0,0,0,0.08); }
+body.light .kpi-value { color: #0f1a2e; }
+body.light .kpi-label { color: #7a8aa8; }
+body.light .section-header { background: #eef2ff; border-color: rgba(0,0,0,0.08); }
+body.light .section-header span { color: #0f1a2e; }
+body.light .comparison-table td { color: #3d4f6e; }
+body.light .comparison-table tr:hover td { background: rgba(26,143,181,0.05); }
+body.light .med-card { background: #ffffff; border-color: rgba(0,0,0,0.08); }
+body.light .med-name { color: #0f1a2e; }
+body.light .med-brand { color: #7a8aa8; }
+body.light .med-row-val { color: #3d4f6e; }
+body.light .med-pearl { background: rgba(245,166,35,0.1); }
+body.light .filter-btn { color: #3d4f6e; border-color: rgba(0,0,0,0.15); }
+body.light .filter-btn.active { background: var(--accent); color: #fff; }
+body.light .med-search-wrap input { background: #ffffff; color: #0f1a2e; border-color: rgba(0,0,0,0.15); }
+body.light .note-builder { background: #ffffff; border-color: rgba(0,0,0,0.08); }
+body.light .note-field input, body.light .note-field textarea, body.light .note-field select { background: #f4f6fb; color: #0f1a2e; border-color: rgba(0,0,0,0.15); }
+body.light .disclaimer-bar { background: rgba(26,143,181,0.1); color: #1a5f7a; border-color: rgba(26,143,181,0.2); }
+body.light .sub-tab { color: #3d4f6e; }
+body.light .sub-tab.active { color: var(--accent); background: var(--accent-dim); }
+body.light .scale-question { background: #eef2ff; }
+body.light .scale-question-text { color: #0f1a2e; }
+body.light .accordion-header { background: #eef2ff !important; color: #0f1a2e !important; }
+body.light .accordion-body { background: #f8faff; }
+body.light .accordion-body p, body.light .accordion-body li { color: #3d4f6e; }
+body.light .accordion-body .mini-table td { color: #3d4f6e; border-color: rgba(0,0,0,0.08); }
+body.light .domain-section-label h2 { color: #0f1a2e; }
+body.light .domain-section-label { border-color: var(--accent); }
+body.light .neuro-body .neuro-row { color: #3d4f6e; }
+body.light .integ-card-body .integ-row { color: #3d4f6e; }
+body.light .spec-list li { color: #3d4f6e; }
+body.light .specialty-body { background: #ffffff; border-color: rgba(0,0,0,0.08); }
+body.light .cyp-enzyme-body { background: #ffffff; }
+body.light .cyp-vals { color: #3d4f6e; }
+body.light .cyp-pearl { background: rgba(245,166,35,0.08); }
+body.light .qtc-meds { color: #3d4f6e; }
+body.light .labs-table td { color: #3d4f6e; }
+body.light .supp-card { background: #ffffff; border-color: rgba(0,0,0,0.08); }
+body.light .supp-name { color: #0f1a2e; }
+body.light .note-output { background: #f4f6fb; border-color: rgba(0,0,0,0.08); }
+body.light .note-output-header { background: rgba(26,143,181,0.08); }
+
+
 /* Theme toggle button */
 .theme-toggle {
   position: fixed;
@@ -4888,14 +4943,34 @@ function renderMeds() {
 
   let filtered = MEDS;
   if (currentFilter !== 'all') {
-    filtered = MEDS.filter(m => m.class && m.class.toLowerCase().includes(currentFilter.replace(/_/g,' ')));
+    const filterMap = {
+      ssri:          m => /ssri|selective serotonin reuptake/i.test(m.cls||''),
+      snri:          m => /snri|serotonin.norepinephrine reuptake/i.test(m.cls||'') && !/non-stimulant/i.test(m.cls||''),
+      atypical_ad:   m => /ndri|nassa|sari|multimodal|mirtazapine|bupropion|trazodone|vortioxetine|vilazodone/i.test((m.cls||'')+(m.name||'')),
+      tca:           m => /tca/i.test(m.cls||''),
+      maoi:          m => /maoi|monoamine oxidase/i.test(m.cls||''),
+      typical_ap:    m => /first.generation|typical antipsychotic|fga/i.test(m.cls||''),
+      atypical_ap:   m => /second.generation|sga|atypical.*antipsychotic|serotonin.*antagonist.*antipsychotic/i.test(m.cls||'') && !/non-stimulant/i.test(m.cls||''),
+      mood_stabilizer: m => /mood stabilizer|anticonvulsant.*mood|lithium/i.test(m.cls||'') || ['Lithium','Valproate','Lamotrigine','Carbamazepine','Oxcarbazepine'].includes(m.name),
+      stimulant:     m => /amphetamine|methylphenidate|prodrug amph/i.test(m.cls||'') && !/non.stimulant/i.test(m.cls||''),
+      non_stimulant: m => /non.stimulant|atomoxetine|viloxazine|guanfacine|clonidine|alpha-2/i.test((m.cls||'')+(m.name||'')),
+      benzodiazepine:m => /benzodiazepine/i.test(m.cls||''),
+      sleep:         m => /hypnotic|z-drug|dora|orexin|melatonin|ramelteon|suvorexant|lemborexant|zolpidem|eszopiclone/i.test((m.cls||'')+(m.name||'')),
+      substance:     m => /aud|opioid antagonist|aldehyde|acamprosate|naltrexone|naloxone|buprenorphine|varenicline|disulfiram|methadone|gaba.glutamate/i.test((m.cls||'')+(m.name||'')),
+      augmentation:  m => /buspirone|lithium|lamotrigine|thyroid|aripiprazole|brexpiprazole|quetiapine|azapirone|supplement|folate|medical food/i.test((m.cls||'')+(m.name||'')),
+      dementia:      m => /acetylcholinesterase|nmda|cognit|donepezil|rivastigmine|galantamine|memantine|aducanumab|lecanemab/i.test((m.cls||'')+(m.name||'')),
+    };
+    const fn = filterMap[currentFilter];
+    filtered = fn ? MEDS.filter(fn) : MEDS;
   }
   if (currentSearch) {
     filtered = filtered.filter(m =>
       (m.name||'').toLowerCase().includes(currentSearch) ||
       (m.brand||'').toLowerCase().includes(currentSearch) ||
+      (m.cls||'').toLowerCase().includes(currentSearch) ||
       (m.class||'').toLowerCase().includes(currentSearch) ||
       (m.indication||'').toLowerCase().includes(currentSearch) ||
+      (m.moa||'').toLowerCase().includes(currentSearch) ||
       (m.pearl||'').toLowerCase().includes(currentSearch)
     );
   }
@@ -4912,7 +4987,7 @@ function renderMeds() {
           <div class="med-name">${m.name}</div>
           <div class="med-brand">${m.brand || ''}</div>
         </div>
-        <div class="med-class-badge">${m.class || ''}</div>
+        <div class="med-class-badge">${(m.cls||m.class||'').split('(')[0].split('/')[0].trim()}</div>
       </div>
       ${m.indication ? `<div class="med-row"><span class="med-row-lbl">Indication</span><span class="med-row-val">${m.indication}</span></div>` : ''}
       ${m.dose ? `<div class="med-row"><span class="med-row-lbl">Dose</span><span class="med-row-val">${m.dose}</span></div>` : ''}
