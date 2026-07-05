@@ -690,7 +690,7 @@ select.form-control { cursor: pointer; }
   .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
   .sidebar.open { transform: translateX(0); }
   .main-content { margin-left: 0; }
-  .page-inner { padding: 20px 16px 40px; }
+  @media (max-width: 640px) { .page-inner { padding: 20px 16px 40px; } }
   .flags-grid { grid-template-columns: repeat(2,1fr); }
   .grid-4 { grid-template-columns: repeat(2,1fr); }
   .doc-layout { grid-template-columns: 1fr; }
@@ -4828,12 +4828,20 @@ const MEDS = [
 
 // ── NAVIGATION ──────────────────────────────────────
 function showPage(id, navEl) {
-  document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+  // Hide all pages via class (consistent — no inline style conflicts)
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active-page');
+    p.style.display = '';   // clear any residual inline style
+  });
   const page = document.getElementById(id);
-  if (page) page.style.display = 'block';
+  if (page) page.classList.add('active-page');
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (navEl) navEl.classList.add('active');
   window.scrollTo(0, 0);
+  // Lazy-init meds page on first visit
+  if (id === 'page-medications' && !window._medsRendered) {
+    initMeds(); window._medsRendered = true;
+  }
 }
 
 function toggleSection(id) {
@@ -5736,16 +5744,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!p.classList.contains('active')) p.style.display = '';
   });
 
-  // ── Load meds when page shown ───────────────────────────────────────────────
-  const medsPage = document.getElementById('page-medications');
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach(m => {
-      if (m.attributeName === 'style' && medsPage.style.display !== 'none') {
-        if (!window._medsRendered) { initMeds(); window._medsRendered = true; }
-      }
-    });
-  });
-  if (medsPage) observer.observe(medsPage, { attributes: true });
+  // Meds init now handled inside showPage on first navigation
 
   // ── Show default scale ──────────────────────────────────────────────────────
   const firstScaleTab = document.querySelector('.scale-tab');
