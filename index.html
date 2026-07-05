@@ -154,6 +154,7 @@ body {
 .page-title {
   font-family: var(--font-display);
   font-size: 1.75rem;
+  font-weight: 700;
   color: var(--text-primary);
   line-height: 1.2;
   margin-bottom: 6px;
@@ -162,15 +163,15 @@ body {
 .page-badge {
   display: inline-block;
   font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
   color: var(--accent);
-  background: var(--accent-dim);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 3px 8px;
-  margin-bottom: 10px;
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  border-radius: 20px;
+  padding: 4px 12px;
+  margin-bottom: 12px;
 }
 
 /* ── CARDS ───────────────────────────────────── */
@@ -738,15 +739,17 @@ body.light .cyp-enzyme-header h3 { color: #fff; }
 body.light .scale-container { background: var(--bg-card); }
 body.light .neuro-icon { background: rgba(0,0,0,0.15); }
 
-body.light .brand-name { color: #0f1a2e !important; }
-body.light .brand-name span { color: var(--accent) !important; }
-body.light .brand-sub { color: #3d4f6e !important; }
+/* brand colors handled by sidebar-brand dark block */
 body.light .nav-item { color: #3d4f6e; }
 body.light .nav-item.active { color: var(--accent); background: var(--accent-dim); }
 body.light .nav-item:hover { color: var(--accent); background: var(--accent-dim); }
 body.light .nav-section-label { color: #7a8aa8; }
-body.light .page-title { color: #0f1a2e; }
-body.light .page-subtitle { color: #3d4f6e; }
+body.light .page-title {
+  color: #0c1a30;
+  font-weight: 700;
+  font-size: 2rem;
+}
+body.light .page-subtitle { color: #2d3f5a; font-size: 0.9rem; }
 body.light .card { background: #ffffff; border-color: rgba(0,0,0,0.08); }
 body.light .hero-band { background: linear-gradient(135deg, #1a3a5c 0%, #0d2240 100%); }
 body.light .hero-band-title, body.light .hero-band-sub { color: #fff !important; }
@@ -767,7 +770,12 @@ body.light .filter-btn.active { background: var(--accent); color: #fff; }
 body.light .med-search-wrap input { background: #ffffff; color: #0f1a2e; border-color: rgba(0,0,0,0.15); }
 body.light .note-builder { background: #ffffff; border-color: rgba(0,0,0,0.08); }
 body.light .note-field input, body.light .note-field textarea, body.light .note-field select { background: #f4f6fb; color: #0f1a2e; border-color: rgba(0,0,0,0.15); }
-body.light .disclaimer-bar { background: rgba(26,143,181,0.1); color: #1a5f7a; border-color: rgba(26,143,181,0.2); }
+body.light .page-badge {
+  color: #1a7a9a;
+  border-color: #1a7a9a;
+  background: transparent;
+}
+body.light .disclaimer-bar { background: rgba(26,143,181,0.08); color: #0f5a78; border-color: rgba(26,143,181,0.22); font-weight: 500; }
 body.light .sub-tab { color: #3d4f6e; }
 body.light .sub-tab.active { color: var(--accent); background: var(--accent-dim); }
 body.light .scale-question { background: #eef2ff; }
