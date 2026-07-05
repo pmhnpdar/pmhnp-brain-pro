@@ -734,6 +734,33 @@ body.light .brand-sub { color: rgba(255,255,255,0.65) !important; }
 body.light .accordion-body { background: #f8faff; }
 body.light .note-text { color: #2a3a55; }
 body.light .comparison-table th { background: #eef2ff; }
+.table-category-header td {
+  background: linear-gradient(90deg, rgba(56,178,212,0.18) 0%, rgba(56,178,212,0.06) 100%);
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border-top: 2px solid var(--accent);
+  border-bottom: 1px solid rgba(56,178,212,0.2);
+}
+.table-category-nonstim td {
+  background: linear-gradient(90deg, rgba(200,119,90,0.16) 0%, rgba(200,119,90,0.05) 100%);
+  color: var(--accent-copper);
+  border-top: 2px solid var(--accent-copper);
+  border-bottom: 1px solid rgba(200,119,90,0.2);
+}
+body.light .table-category-header td {
+  background: rgba(26,143,181,0.08);
+  color: #1a7a9a;
+  border-top-color: #1a7a9a;
+}
+body.light .table-category-nonstim td {
+  background: rgba(176,90,56,0.07);
+  color: #8a4020;
+  border-top-color: #8a4020;
+}
 body.light .labs-table th { background: #eef2ff; }
 body.light .cyp-enzyme-header h3 { color: #fff; }
 body.light .scale-container { background: var(--bg-card); }
@@ -2356,15 +2383,24 @@ body.light .section-divider h2 { color: #0f1a2e; }
       <table class="comparison-table">
         <thead><tr><th>Drug</th><th>Class</th><th>Duration</th><th>Onset</th><th>Preferred When</th><th>Schedule</th></tr></thead>
         <tbody>
-          <tr><td><strong>Mixed amphetamine salts XR</strong><br><small>Adderall XR</small></td><td>Amphetamine</td><td>8–12h</td><td>30–60 min</td><td>ADHD + depression, cognitive fatigue</td><td>CII</td></tr>
-          <tr><td><strong>Lisdexamfetamine</strong><br><small>Vyvanse</small></td><td>Amphetamine (prodrug)</td><td>10–14h</td><td>60–90 min</td><td>Smooth onset/offset; binge eating; lower abuse potential</td><td>CII</td></tr>
-          <tr><td><strong>Methylphenidate XR</strong><br><small>Concerta/Ritalin LA</small></td><td>Methylphenidate</td><td>8–12h</td><td>30–60 min</td><td>Cardiac risk preference; anxiety-prone (slightly less than AMP)</td><td>CII</td></tr>
-          <tr><td><strong>Methylphenidate patch</strong><br><small>Daytrana</small></td><td>Methylphenidate</td><td>Variable (patch off → 4h)</td><td>60–90 min</td><td>Swallowing difficulty; titration control</td><td>CII</td></tr>
-          <tr><td><strong>Dexmethylphenidate XR</strong><br><small>Focalin XR</small></td><td>Methylphenidate (d-isomer)</td><td>8–10h</td><td>30–60 min</td><td>Smoother than racemic MPH; better tolerability</td><td>CII</td></tr>
-          <tr><td><strong>Viloxazine</strong><br><small>Qelbree</small></td><td>SNRI-like (non-stimulant)</td><td>24h</td><td>Days–weeks</td><td>Anxiety comorbidity; no abuse risk; ages 6+</td><td>Non-scheduled</td></tr>
-          <tr><td><strong>Atomoxetine</strong><br><small>Strattera</small></td><td>NRI (non-stimulant)</td><td>24h</td><td>4–6 weeks</td><td>Anxiety, tics, substance use risk, Tourette</td><td>Non-scheduled</td></tr>
-          <tr><td><strong>Guanfacine XR</strong><br><small>Intuniv</small></td><td>Alpha-2A agonist</td><td>24h</td><td>Weeks</td><td>ADHD + emotional dysregulation, tics, aggression</td><td>Non-scheduled</td></tr>
-          <tr><td><strong>Clonidine XR</strong><br><small>Kapvay</small></td><td>Alpha-2 agonist</td><td>12h (XR)</td><td>Weeks</td><td>Hyperactivity, tics, sleep; rebound BP risk</td><td>Non-scheduled</td></tr>
+          <!-- ── STIMULANTS ─────────────────────────────────────────── -->
+          <tr class="table-category-header">
+            <td colspan="6"><i class="fa fa-bolt"></i> &nbsp;STIMULANTS — Schedule II Controlled Substances</td>
+          </tr>
+          <tr><td><strong>Mixed amphetamine salts XR</strong><br><small>Adderall XR</small></td><td>Amphetamine</td><td>8–12h</td><td>30–60 min</td><td>ADHD + depression, cognitive fatigue; broader receptor profile</td><td>CII</td></tr>
+          <tr><td><strong>Lisdexamfetamine</strong><br><small>Vyvanse</small></td><td>Amphetamine (prodrug)</td><td>10–14h</td><td>60–90 min</td><td>Smooth onset/offset; binge eating disorder; lower abuse potential than IR</td><td>CII</td></tr>
+          <tr><td><strong>Methylphenidate XR</strong><br><small>Concerta / Ritalin LA</small></td><td>Methylphenidate</td><td>8–12h</td><td>30–60 min</td><td>Preferred if cardiac concern; slightly less cardiovascular effect than amphetamines</td><td>CII</td></tr>
+          <tr><td><strong>Dexmethylphenidate XR</strong><br><small>Focalin XR</small></td><td>Methylphenidate (d-isomer)</td><td>8–10h</td><td>30–60 min</td><td>Smoother than racemic MPH; better tolerability; half the dose of MPH</td><td>CII</td></tr>
+          <tr><td><strong>Methylphenidate patch</strong><br><small>Daytrana</small></td><td>Methylphenidate (transdermal)</td><td>Variable (remove patch → 4h washout)</td><td>60–90 min</td><td>Swallowing difficulty; dose titration flexibility; remove early to aid sleep</td><td>CII</td></tr>
+          <!-- ── NON-STIMULANTS ──────────────────────────────────────── -->
+          <tr class="table-category-header table-category-nonstim">
+            <td colspan="6"><i class="fa fa-shield-alt"></i> &nbsp;NON-STIMULANTS — Non-Scheduled | No Abuse Potential</td>
+          </tr>
+          <tr><td><strong>Atomoxetine</strong><br><small>Strattera</small></td><td>NRI (Norepinephrine Reuptake Inhibitor)</td><td>24h</td><td>4–6 weeks</td><td>Comorbid anxiety, tics, Tourette, active SUD, or abuse risk</td><td>Non-scheduled</td></tr>
+          <tr><td><strong>Viloxazine</strong><br><small>Qelbree</small></td><td>SNRI-like (NE + serotonin modulation)</td><td>24h</td><td>2–4 weeks</td><td>Anxious ADHD; ages 6+; once-daily; faster onset than atomoxetine</td><td>Non-scheduled</td></tr>
+          <tr><td><strong>Guanfacine XR</strong><br><small>Intuniv</small></td><td>Alpha-2A agonist</td><td>24h</td><td>Weeks</td><td>ADHD + emotional dysregulation, aggression, or tic disorder; adjunct to stimulant</td><td>Non-scheduled</td></tr>
+          <tr><td><strong>Clonidine XR</strong><br><small>Kapvay</small></td><td>Alpha-2 agonist (less selective)</td><td>12h (XR)</td><td>Weeks</td><td>Hyperactivity, tics, insomnia; monitor for rebound hypertension on discontinuation</td><td>Non-scheduled</td></tr>
+          <tr><td><strong>Bupropion XL</strong><br><small>Wellbutrin XL — off-label</small></td><td>NDRI (DA + NE reuptake inhibitor)</td><td>24h</td><td>2–4 weeks</td><td>ADHD + MDD comorbidity; avoid if seizure history; off-label for ADHD</td><td>Non-scheduled</td></tr>
         </tbody>
       </table>
     </div>
