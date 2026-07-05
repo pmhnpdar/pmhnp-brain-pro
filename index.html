@@ -213,7 +213,7 @@ body {
 .pill-teal   { background: rgba(56,178,212,0.15);  color: #38b2d4; border: 1px solid rgba(56,178,212,0.25); }
 .pill-blue   { background: rgba(99,179,237,0.15);  color: #63b3ed; border: 1px solid rgba(99,179,237,0.25); }
 .pill-purple { background: rgba(159,122,234,0.15); color: #b794f4; border: 1px solid rgba(159,122,234,0.25); }
-.pill-amber  { background: rgba(245,158,11,0.15);  color: #fbbf24; border: 1px solid rgba(245,158,11,0.25); }
+.pill-amber  { background: rgba(180,100,0,0.10);  color: #8a5c00; border: 1px solid rgba(180,100,0,0.25); }
 .pill-green  { background: rgba(34,197,94,0.15);   color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
 .pill-orange { background: rgba(249,115,22,0.15);  color: #fb923c; border: 1px solid rgba(249,115,22,0.25); }
 .pill-red    { background: rgba(239,68,68,0.15);   color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
@@ -222,7 +222,7 @@ body {
 .pill-copper { background: rgba(200,119,90,0.15);  color: #c8775a; border: 1px solid rgba(200,119,90,0.25); }
 
 .badge-strong   { background: rgba(56,178,212,0.18); color: #38b2d4; font-size:0.62rem; padding:2px 8px; border-radius:20px; font-weight:700; }
-.badge-moderate { background: rgba(245,158,11,0.18); color: #fbbf24; font-size:0.62rem; padding:2px 8px; border-radius:20px; font-weight:700; }
+.badge-moderate { background: rgba(180,100,0,0.15); color: #7a5000; font-size:0.62rem; padding:2px 8px; border-radius:20px; font-weight:700; }
 .badge-emerging { background: rgba(99,102,241,0.18); color: #a5b4fc; font-size:0.62rem; padding:2px 8px; border-radius:20px; font-weight:700; }
 .badge-limited  { background: rgba(107,114,128,0.18);color: #9ca3af; font-size:0.62rem; padding:2px 8px; border-radius:20px; font-weight:700; }
 
@@ -721,7 +721,15 @@ body.light .sidebar {
   background: #ffffff;
   border-right: 1px solid rgba(0,0,0,0.09);
 }
-body.light .brand-logo { background: var(--accent); }
+body.light .sidebar-brand {
+  background: #0f2640;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+body.light .brand-icon { background: var(--accent); }
+body.light .brand-logo { background: transparent; }
+body.light .brand-name { color: #ffffff !important; }
+body.light .brand-name span { color: #5dd6f5 !important; }
+body.light .brand-sub { color: rgba(255,255,255,0.65) !important; }
 body.light .accordion-body { background: #f8faff; }
 body.light .note-text { color: #2a3a55; }
 body.light .comparison-table th { background: #eef2ff; }
@@ -783,6 +791,30 @@ body.light .supp-card { background: #ffffff; border-color: rgba(0,0,0,0.08); }
 body.light .supp-name { color: #0f1a2e; }
 body.light .note-output { background: #f4f6fb; border-color: rgba(0,0,0,0.08); }
 body.light .note-output-header { background: rgba(26,143,181,0.08); }
+
+/* Light mode: amber/yellow → dark readable */
+body.light .pill-amber { background: rgba(180,100,0,0.10); color: #7a4f00; border-color: rgba(180,100,0,0.25); }
+body.light .badge-moderate { background: rgba(180,100,0,0.12); color: #6b4400; }
+body.light .cyp-tag.inducer { background: rgba(150,90,0,0.12); color: #6b4400; }
+body.light .cyp-pearl { background: rgba(255,245,220,0.8); border-left-color: #b07000; color: #3d2800; }
+body.light .med-pearl { background: rgba(255,245,220,0.8); border-left-color: #b07000; color: #3d2800; }
+body.light .cyp-pearl i, body.light .med-pearl i { color: #b07000 !important; }
+body.light h4 > i.fa-lightbulb, body.light h4 > i.fa-star, body.light h4 > i.fa-microscope, body.light h4 > i.fa-utensils { color: #b07000 !important; }
+body.light .decision-tool { background: #ffffff; border: 1px solid rgba(0,0,0,0.08); }
+body.light .dr-label { color: #0f1a2e; font-weight: 700; }
+body.light .dr-rec { color: #0a3060; }
+body.light .dr-rationale { color: #3d4f6e; }
+body.light .decision-result { background: #eef4ff; border: 1px solid rgba(26,143,181,0.2); }
+body.light .step-card { background: #ffffff; border: 1px solid rgba(0,0,0,0.08); }
+body.light .step-label { color: var(--accent); }
+body.light .step-card h4 { color: #0f1a2e; }
+body.light .step-card li { color: #3d4f6e; }
+body.light .alert-info { background: rgba(26,143,181,0.08); border-color: rgba(26,143,181,0.25); color: #1a4a6e; }
+body.light .alert-warning { background: rgba(180,100,0,0.08); border-color: rgba(180,100,0,0.25); color: #5a3500; }
+body.light .disorder-nav { background: #eef2ff; border-color: rgba(0,0,0,0.08); }
+body.light .disorder-btn { color: #3d4f6e; border-color: rgba(0,0,0,0.12); background: #ffffff; }
+body.light .disorder-btn.active { background: var(--accent); color: #ffffff; border-color: var(--accent); }
+body.light .section-divider h2 { color: #0f1a2e; }
 
 
 /* Theme toggle button */
