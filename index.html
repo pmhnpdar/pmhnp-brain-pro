@@ -698,9 +698,117 @@ select.form-control { cursor: pointer; }
   .hero-actions { gap: 8px; }
   .hero-btn { min-width: 100px; padding: 12px 14px; }
 }
+
+/* ── LIGHT MODE ── */
+body.light {
+  --bg-primary: #f4f6fb;
+  --bg-secondary: #eaecf4;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0f4ff;
+  --accent: #1a8fb5;
+  --accent-hover: #1577a0;
+  --accent-dim: rgba(26,143,181,0.10);
+  --accent-copper: #b05a38;
+  --copper-dim: rgba(176,90,56,0.10);
+  --text-primary: #0f1a2e;
+  --text-secondary: #3d4f6e;
+  --text-muted: #7a8aa8;
+  --border: rgba(26,143,181,0.18);
+  --border-subtle: rgba(0,0,0,0.07);
+  --shadow: 0 4px 24px rgba(0,0,0,0.10);
+}
+body.light .sidebar {
+  background: #ffffff;
+  border-right: 1px solid rgba(0,0,0,0.09);
+}
+body.light .brand-logo { background: var(--accent); }
+body.light .accordion-body { background: #f8faff; }
+body.light .note-text { color: #2a3a55; }
+body.light .comparison-table th { background: #eef2ff; }
+body.light .labs-table th { background: #eef2ff; }
+body.light .cyp-enzyme-header h3 { color: #fff; }
+body.light .scale-container { background: var(--bg-card); }
+body.light .neuro-icon { background: rgba(0,0,0,0.15); }
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  top: 14px;
+  right: 18px;
+  z-index: 1000;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle .toggle-icon { font-size: 0.95rem; }
+/* ── DIAGNOSE PAGE — heading hierarchy ── */
+.domain-section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 1rem 0 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+}
+.domain-section-label .ds-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: #fff; flex-shrink: 0;
+}
+.domain-section-label h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+.domain-section-label p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Accordion headers — more contrast */
+.accordion-header {
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  letter-spacing: 0.01em;
+  padding: 12px 16px !important;
+  background: var(--bg-secondary) !important;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+}
+.accordion-header:hover {
+  border-left-color: var(--accent);
+  color: var(--accent) !important;
+  background: var(--accent-dim) !important;
+}
+.accordion-header.open {
+  border-left-color: var(--accent);
+  color: var(--accent) !important;
+  background: var(--accent-dim) !important;
+}
+
+
 </style>
 </head>
 <body>
+<button class="theme-toggle" onclick="toggleTheme()" id="theme-btn" data-testid="button-theme-toggle">
+  <span class="toggle-icon">🌙</span> <span id="theme-label">Dark</span>
+</button>
 
 <!-- ═══════════════════════════════════════════ SIDEBAR -->
 <aside class="sidebar" id="sidebar">
@@ -935,6 +1043,11 @@ select.form-control { cursor: pointer; }
 
   <!-- Domain panels -->
   <div id="domain-mood" class="domain-panel">
+        <div class="domain-section-label">
+          <div class="ds-icon">😔</div>
+          <div><h2>Mood Disorders</h2><p>MDD · Bipolar · Dysthymia · Cyclothymia</p></div>
+        </div>
+        
     <div class="card">
       <div class="card-header"><div class="card-title">🌧 Mood Disorders — Diagnostic Framework</div></div>
       <div class="card-body">
@@ -1027,6 +1140,11 @@ select.form-control { cursor: pointer; }
   </div><!-- /domain-mood -->
 
   <div id="domain-anxiety" class="domain-panel">
+        <div class="domain-section-label">
+          <div class="ds-icon">⚡</div>
+          <div><h2>Anxiety Disorders</h2><p>GAD · Panic · Social · Specific Phobia · Agoraphobia</p></div>
+        </div>
+        
     <div class="card">
       <div class="card-header"><div class="card-title">😰 Anxiety Disorders — Diagnostic Framework</div></div>
       <div class="card-body">
@@ -1093,6 +1211,11 @@ select.form-control { cursor: pointer; }
   </div><!-- /domain-anxiety -->
 
   <div id="domain-psychosis" class="domain-panel">
+        <div class="domain-section-label">
+          <div class="ds-icon">🧠</div>
+          <div><h2>Psychotic Disorders</h2><p>Schizophrenia · Schizoaffective · Brief Psychotic · Delusional</p></div>
+        </div>
+        
     <div class="card">
       <div class="card-header"><div class="card-title">🔮 Psychosis — Diagnostic Framework</div></div>
       <div class="card-body">
@@ -1159,6 +1282,11 @@ select.form-control { cursor: pointer; }
   </div><!-- /domain-psychosis -->
 
   <div id="domain-substance" class="domain-panel">
+        <div class="domain-section-label">
+          <div class="ds-icon">💊</div>
+          <div><h2>Substance Use Disorders</h2><p>AUD · OUD · Stimulant · Cannabis · Tobacco · Polysubstance</p></div>
+        </div>
+        
     <div class="card">
       <div class="card-header"><div class="card-title">🧪 Substance &amp; Behavioral — Diagnostic Framework</div></div>
       <div class="card-body">
@@ -1207,6 +1335,11 @@ select.form-control { cursor: pointer; }
   </div>
 
   <div id="domain-trauma" class="domain-panel">
+        <div class="domain-section-label">
+          <div class="ds-icon">🛡</div>
+          <div><h2>Trauma & Stressor-Related</h2><p>PTSD · Acute Stress · Adjustment Disorder · Complex Trauma</p></div>
+        </div>
+        
     <div class="card">
       <div class="card-header"><div class="card-title">🛡 Trauma &amp; PTSD — Diagnostic Framework</div></div>
       <div class="card-body">
@@ -1246,6 +1379,11 @@ select.form-control { cursor: pointer; }
   </div>
 
   <div id="domain-attention" class="domain-panel">
+        <div class="domain-section-label">
+          <div class="ds-icon">🎯</div>
+          <div><h2>Neurodevelopmental</h2><p>ADHD · ASD · Specific Learning Disorder · Tic Disorders</p></div>
+        </div>
+        
     <div class="card">
       <div class="card-header"><div class="card-title">⚡ Attention &amp; Executive — Diagnostic Framework</div></div>
       <div class="card-body">
@@ -1283,6 +1421,11 @@ select.form-control { cursor: pointer; }
   </div>
 
   <div id="domain-cognition" class="domain-panel">
+        <div class="domain-section-label">
+          <div class="ds-icon">🔬</div>
+          <div><h2>Neurocognitive Disorders</h2><p>MCI · Alzheimer's · Vascular · Lewy Body · FTD</p></div>
+        </div>
+        
     <div class="card">
       <div class="card-header"><div class="card-title">🧬 Cognition &amp; Neurocognitive — Diagnostic Framework</div></div>
       <div class="card-body">
@@ -1304,6 +1447,11 @@ select.form-control { cursor: pointer; }
   </div>
 
   <div id="domain-sleep" class="domain-panel">
+        <div class="domain-section-label">
+          <div class="ds-icon">🌙</div>
+          <div><h2>Sleep-Wake Disorders</h2><p>Insomnia · Hypersomnia · Narcolepsy · RLS · Parasomnias</p></div>
+        </div>
+        
     <div class="card">
       <div class="card-header"><div class="card-title">🌙 Sleep &amp; Circadian — Diagnostic Framework</div></div>
       <div class="card-body">
@@ -1332,6 +1480,11 @@ select.form-control { cursor: pointer; }
   </div>
 
   <div id="domain-personality" class="domain-panel">
+        <div class="domain-section-label">
+          <div class="ds-icon">🔄</div>
+          <div><h2>Personality Disorders</h2><p>BPD · NPD · OCPD · Antisocial · Cluster A/B/C</p></div>
+        </div>
+        
     <div class="card">
       <div class="card-header"><div class="card-title">🪞 Personality — Diagnostic Framework</div></div>
       <div class="card-body">
@@ -5390,6 +5543,16 @@ document.head.appendChild(dtStyle);
 
 function setDocEngine(type) {
   showSubtab('documents', type === 'eval' ? 'eval' : type === 'followup' ? 'followup' : type === 'formulation' ? 'formulation' : 'risk');
+}
+
+
+// ── THEME TOGGLE ─────────────────────────────────────────────────────────
+function toggleTheme() {
+  const isLight = document.body.classList.toggle('light');
+  const btn = document.getElementById('theme-btn');
+  const lbl = document.getElementById('theme-label');
+  if (btn) btn.querySelector('.toggle-icon').textContent = isLight ? '☀️' : '🌙';
+  if (lbl) lbl.textContent = isLight ? 'Light' : 'Dark';
 }
 
 // ── INIT ──────────────────────────────────────────────
