@@ -141,11 +141,14 @@ body {
   display: flex;
   flex-direction: column;
 }
-.page { display: none; flex: 1; }
-.page.active-page { display: block; }
+.page { display: none; flex: 1; overflow-x: hidden; }
+.page.active-page { display: flex; flex-direction: column; }
 .page-inner {
+  flex: 1;
   width: 100%;
+  min-width: 0;
   padding: 36px 40px 60px;
+  box-sizing: border-box;
 }
 
 /* ── PAGE HEADER ─────────────────────────────── */
