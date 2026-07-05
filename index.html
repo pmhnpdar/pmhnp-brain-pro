@@ -4827,46 +4827,38 @@ function showSubtab(pageId, tabId) {
 
 // ── DECISION TOOLS ───────────────────────────────────
 function runADChooser() {
-  const f = id => document.getElementById(id) ? document.getElementById(id).checked : false;
-  const out = document.getElementById('ad-chooser-result');
+  const checked = Array.from(document.querySelectorAll('#ad-chooser-checks input:checked')).map(c => c.value);
+  const out = document.getElementById('ad-result');
   if (!out) return;
   let rec = '', rationale = '';
-  const anxious = f('ad-anxious'), fatigue = f('ad-fatigue'), sexual = f('ad-sexual'),
-        insomnia = f('ad-insomnia'), pain = f('ad-pain'), preg = f('ad-pregnancy'),
-        seizure = f('ad-seizure'), nointeract = f('ad-nointeract'), wt = f('ad-weight');
-
-  if (preg)          { rec = 'Sertraline'; rationale = 'Most safety data in pregnancy; preferred by most guidelines.'; }
-  else if (seizure)  { rec = 'Sertraline or Escitalopram'; rationale = 'Avoid bupropion (lowers seizure threshold). SSRIs preferred.'; }
-  else if (pain)     { rec = 'Duloxetine or Venlafaxine'; rationale = 'SNRI mechanism provides dual benefit for depression + neuropathic/musculoskeletal pain.'; }
-  else if (fatigue && wt) { rec = 'Bupropion (Wellbutrin XL)'; rationale = 'Dopamine/NE mechanism: activating, weight-neutral/negative, no sexual dysfunction. Avoid if seizure Hx.'; }
-  else if (sexual && wt)  { rec = 'Bupropion (primary) or Mirtazapine (if insomnia needed)'; rationale = 'Bupropion: lowest sexual SE of any antidepressant; weight-neutral. Mirtazapine: weight gain + sedation but no sexual SE.'; }
-  else if (insomnia)  { rec = 'Mirtazapine (primary) ± Trazodone as augmentation'; rationale = 'Mirtazapine: H1 antagonism → sedating; appetite/weight gain expected. Trazodone 50–100mg HS is adjunct option.'; }
-  else if (nointeract){ rec = 'Escitalopram'; rationale = 'Minimal CYP450 interactions (2D6/3A4 minimal). Ideal for patients on complex med regimens.'; }
-  else if (anxious)   { rec = 'Escitalopram or Sertraline'; rationale = 'Both have strongest evidence for comorbid anxiety. Start low (escitalopram 5mg, sertraline 25mg) to avoid initial activation.'; }
-  else                { rec = 'Sertraline'; rationale = 'Broadest FDA label (MDD, OCD, PTSD, panic, SAD, PMDD). Well-tolerated, widely studied.'; }
-
-  out.innerHTML = '<div class="decision-result"><div class="dr-label">Recommended:</div><div class="dr-rec">' + rec + '</div><div class="dr-rationale">' + rationale + '</div></div>';
+  const has = v => checked.includes(v);
+  if (has('pregnancy'))    { rec = 'Sertraline'; rationale = 'Most safety data in pregnancy; preferred by most guidelines. Start 25 mg, target 50–100 mg.'; }
+  else if (has('seizure')) { rec = 'Sertraline or Escitalopram'; rationale = 'Avoid bupropion — lowers seizure threshold. SSRIs preferred.'; }
+  else if (has('pain'))    { rec = 'Duloxetine or Venlafaxine XR'; rationale = 'SNRI mechanism provides dual benefit for depression + neuropathic/musculoskeletal pain.'; }
+  else if (has('fatigue') && has('weight')) { rec = 'Bupropion XL (Wellbutrin XL)'; rationale = 'DA/NE mechanism: activating, weight-neutral to negative, no sexual dysfunction. Avoid if seizure Hx.'; }
+  else if (has('sexual') && has('weight'))  { rec = 'Bupropion XL (primary)'; rationale = 'Lowest sexual SE of any antidepressant; weight-neutral to negative. If insomnia also flagged, consider adding low-dose mirtazapine.'; }
+  else if (has('insomnia'))  { rec = 'Mirtazapine 7.5–15 mg HS ± Trazodone augmentation'; rationale = 'H1 antagonism → sedating; appetite/weight gain expected. Trazodone 50–100 mg HS is an adjunct option with minimal sexual SE.'; }
+  else if (has('nointeractions')) { rec = 'Escitalopram'; rationale = 'Minimal CYP450 interactions. Ideal for complex med regimens.'; }
+  else if (has('anxious'))   { rec = 'Escitalopram or Sertraline'; rationale = 'Both have strongest evidence for comorbid anxiety. Start low (escitalopram 5 mg, sertraline 25 mg) to avoid initial activation jitter.'; }
+  else if (has('fatigue'))   { rec = 'Bupropion XL or Venlafaxine XR'; rationale = 'DA/NE activation addresses anhedonia and low energy better than pure SSRIs.'; }
+  else { rec = 'Sertraline'; rationale = 'Broadest FDA label (MDD, OCD, PTSD, panic, SAD, PMDD). Well-tolerated, widely studied. Start 25–50 mg, target 100–200 mg.'; }
+  out.innerHTML = '<div class="dr-label">Recommended:</div><div class="dr-rec">' + rec + '</div><div class="dr-rationale">' + rationale + '</div>';
   out.style.display = 'block';
 }
 
 function runStimSelector() {
-  const get = id => { const el = document.getElementById(id); return el ? el.value : ''; };
+  const checked = Array.from(document.querySelectorAll('#stim-checks input:checked')).map(c => c.value);
   const out = document.getElementById('stim-result');
   if (!out) return;
-  const concern = get('stim-concern');
-  const age = get('stim-age');
   let rec = '', notes = '';
-
-  if (concern === 'anxiety')     { rec = 'Non-Stimulant: Atomoxetine (Strattera) or Viloxazine (Qelbree)'; notes = 'Stimulants can exacerbate anxiety. Atomoxetine: 4–6 week onset. Viloxazine: once daily, SNE mechanism, good for anxious ADHD.'; }
-  else if (concern === 'substance') { rec = 'Non-Stimulant: Atomoxetine or Viloxazine (if active SUD) — or Vyvanse (if in stable recovery)'; notes = 'Lisdexamfetamine (Vyvanse) has prodrug design → lower abuse potential than IRs. In stable recovery, stimulants can be used with careful monitoring.'; }
-  else if (concern === 'tics')   { rec = 'Guanfacine XR (Intuniv) or Atomoxetine'; notes = 'Alpha-2A agonists reduce tics AND ADHD symptoms. Atomoxetine does not worsen tics. Avoid stimulants or use lowest effective dose with caution.'; }
-  else if (concern === 'sleep')  { rec = 'Lisdexamfetamine (Vyvanse) — longest acting, smooth offset; or Methylphenidate patch (Daytrana)'; notes = 'Smooth offset reduces rebound. Dose timing: give stimulant immediately on waking. Stop patch 3h before desired sleep. Avoid IR formulations after noon.'; }
-  else if (concern === 'cardiac') { rec = 'Methylphenidate XR (Concerta) — slightly lower cardiovascular effect than amphetamines'; notes = 'Obtain ECG if cardiac Hx, murmur, syncope, or family Hx of sudden cardiac death. Non-stimulants preferred if arrhythmia is present.'; }
-  else if (age === 'adult')      { rec = 'Lisdexamfetamine (Vyvanse) or Mixed Amphetamine Salts XR (Adderall XR)'; notes = 'Amphetamines generally more effective than methylphenidate in adults. Vyvanse preferred for smooth onset/offset and lower abuse profile.'; }
-  else if (age === 'child')      { rec = 'Methylphenidate XR (Concerta/Ritalin LA) or Lisdexamfetamine (Vyvanse, 6+)'; notes = 'Both have strong peds evidence. MPH has slightly longer track record. Vyvanse approved 6+. Monitor weight and height growth annually.'; }
-  else                           { rec = 'Lisdexamfetamine (Vyvanse) — first-line standard'; notes = 'Well-tolerated, smooth 12–14h coverage, lower abuse potential, available for adults and children 6+.'; }
-
-  out.innerHTML = '<div class="decision-result"><div class="dr-label">Recommendation:</div><div class="dr-rec">' + rec + '</div><div class="dr-rationale">' + notes + '</div></div>';
+  const has = v => checked.includes(v);
+  if (has('sud'))     { rec = 'Non-Stimulant: Atomoxetine or Viloxazine (active SUD) — Vyvanse if stable recovery'; notes = 'Lisdexamfetamine (Vyvanse) is a prodrug with lower abuse potential than IRs. In stable recovery, stimulants can be used with careful monitoring and pill counts.'; }
+  else if (has('cardiac')) { rec = 'Methylphenidate XR (Concerta) — or Non-Stimulant'; notes = 'Obtain ECG if cardiac Hx, murmur, syncope, or family Hx sudden cardiac death. Non-stimulants preferred if arrhythmia present. Methylphenidate has slightly lower cardiovascular effect than amphetamines.'; }
+  else if (has('tics'))    { rec = 'Guanfacine XR (Intuniv) or Atomoxetine'; notes = 'Alpha-2A agonists reduce tics AND ADHD symptoms. Atomoxetine does not worsen tics. Use stimulants with caution at lowest effective dose only if non-stimulants fail.'; }
+  else if (has('anxiety')) { rec = 'Non-Stimulant: Atomoxetine (Strattera) or Viloxazine (Qelbree)'; notes = 'Stimulants can exacerbate anxiety. Atomoxetine: 4–6 week onset. Viloxazine: once daily, NE mechanism, good for anxious ADHD. If stimulant needed, add SSRI/buspirone first.'; }
+  else if (has('appetite')){ rec = 'Lisdexamfetamine (Vyvanse) or Methylphenidate patch (Daytrana)'; notes = 'Smooth offset reduces rebound appetite suppression. Take with breakfast. Drug holidays on weekends may help weight. Monitor BMI and growth annually.'; }
+  else { rec = 'Lisdexamfetamine (Vyvanse) — First-Line Standard'; notes = 'Well-tolerated, smooth 12–14h coverage, lower abuse potential. Approved adults and children 6+. If no factors selected, standard adult first-line is Vyvanse or Adderall XR.'; }
+  out.innerHTML = '<div class="dr-label">Recommendation:</div><div class="dr-rec">' + rec + '</div><div class="dr-rationale">' + notes + '</div>';
   out.style.display = 'block';
 }
 
@@ -4897,20 +4889,21 @@ function runBipolarCheck() {
 }
 
 function runBenzoHelper() {
-  const el = document.getElementById('benzo-duration');
+  const sel = document.querySelector('input[name="benzo-dur"]:checked');
   const out = document.getElementById('benzo-result');
-  if (!el || !out) return;
-  const val = el.value;
+  if (!out) return;
+  if (!sel) { out.innerHTML = '<div class="dr-label">Select duration above to see taper guidance.</div>'; out.style.display = 'block'; return; }
+  const val = sel.value;
   const plans = {
-    'acute':   { title:'Short-Term Use (<2 weeks)', plan:'Taper over 1–2 weeks. Reduce by 25% every 2–3 days. Minimal physiological dependence expected. Monitor for anxiety rebound (not withdrawal).', risk:'Low', color:'low' },
-    'short':   { title:'Short Use (2–4 weeks)', plan:'Taper 10–25% per week over 2–4 weeks. Switch to longer half-life agent (diazepam) if using high-potency BZD (alprazolam, lorazepam). Monitor for rebound anxiety.', risk:'Low–Moderate', color:'mod' },
-    'medium':  { title:'Medium-Term Use (1–3 months)', plan:'Taper 5–10% every 1–2 weeks over 4–8 weeks. Consider cross-taper to diazepam (Ashton principle). Psychoeducate: symptoms are withdrawal, not return of anxiety. Support with CBT.', risk:'Moderate', color:'mod' },
-    'long':    { title:'Long-Term Use (3–12 months)', plan:'Taper 5% every 2–4 weeks over 3–6 months. Cross-taper to diazepam equivalency first (valium equivalent). Hold taper if severe withdrawal symptoms. Adjuncts: SSRIs/SNRIs (start early), beta-blockers for physical symptoms, gabapentin (off-label). Avoid cold turkey — seizure risk.', risk:'Moderate–High', color:'mod' },
-    'verylong':{ title:'Very Long-Term Use (>1 year)', plan:'Apply Ashton Manual principles. Taper 2–5% every 2–4 weeks over 6–18+ months. Switch to diazepam equivalency. Individualize pace — patient-led taper is safer. Expect protracted withdrawal syndrome (fatigue, cognitive fog, anxiety waves). Specialist involvement recommended. No cold turkey — risk of life-threatening withdrawal seizures.', risk:'High', color:'high' }
+    'acute':   { title:'Short-Term Use (<2 weeks)', plan:'Taper over 1–2 weeks. Reduce by 25% every 2–3 days. Minimal physiological dependence expected. Monitor for anxiety rebound (not true withdrawal).', risk:'Low', color:'low' },
+    'short':   { title:'Short Use (2–4 weeks)', plan:'Taper 10–25% per week over 2–4 weeks. If using high-potency BZD (alprazolam, lorazepam), consider cross-tapering to diazepam first. Monitor for rebound anxiety.', risk:'Low–Moderate', color:'mod' },
+    'medium':  { title:'Medium-Term Use (1–3 months)', plan:'Taper 5–10% every 1–2 weeks over 4–8 weeks. Cross-taper to diazepam (Ashton principle). Psychoeducate: withdrawal symptoms ≠ return of anxiety. Support with CBT-I or CBT for anxiety.', risk:'Moderate', color:'mod' },
+    'long':    { title:'Long-Term Use (3–12 months)', plan:'Taper 5% every 2–4 weeks over 3–6 months. Cross-taper to diazepam equivalency first. Hold taper if severe withdrawal symptoms emerge. Adjuncts: SSRIs/SNRIs (start early), beta-blockers for physical symptoms, gabapentin off-label. Never cold turkey — seizure risk.', risk:'Moderate–High', color:'mod' },
+    'verylong':{ title:'Very Long-Term Use (>1 year)', plan:'Apply Ashton Manual principles. Taper 2–5% every 2–4 weeks over 6–18+ months. Switch to diazepam equivalency first. Patient-led pace is safer. Expect protracted withdrawal syndrome (fatigue, cognitive fog, anxiety waves). Specialist involvement recommended. Never cold turkey — life-threatening withdrawal seizures possible.', risk:'High', color:'high' }
   };
   const p = plans[val];
   if (!p) return;
-  out.innerHTML = '<div class="decision-result scale-result ' + p.color + '"><div class="dr-label">Duration Category: ' + p.title + '</div><div style="margin:0.5rem 0;font-size:0.82rem;color:#e74c3c;font-weight:600;">Risk Level: ' + p.risk + '</div><div class="dr-rationale">' + p.plan + '</div></div>';
+  out.innerHTML = '<div class="dr-label">Duration: ' + p.title + '</div><div style="margin:0.4rem 0;font-size:0.82rem;color:#e74c3c;font-weight:600;">Risk Level: ' + p.risk + '</div><div class="dr-rationale">' + p.plan + '</div>';
   out.style.display = 'block';
 }
 
@@ -5632,7 +5625,17 @@ function toggleTheme() {
 
 // ── INIT ──────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function() {
-  // Load meds on page show
+  // ── Show dashboard on load ──────────────────────────────────────────────────
+  const dashNav = document.querySelector('.nav-item[onclick*="dashboard"]');
+  showPage('page-dashboard', dashNav);
+
+  // ── Init Treat page: make sure MDD active class is correct ─────────────────
+  // (MDD already has 'active' in HTML — just ensure no inline style conflicts)
+  document.querySelectorAll('.disorder-content').forEach(p => {
+    if (!p.classList.contains('active')) p.style.display = '';
+  });
+
+  // ── Load meds when page shown ───────────────────────────────────────────────
   const medsPage = document.getElementById('page-medications');
   const observer = new MutationObserver((mutations) => {
     mutations.forEach(m => {
@@ -5643,11 +5646,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   if (medsPage) observer.observe(medsPage, { attributes: true });
 
-  // Show default scale
+  // ── Show default scale ──────────────────────────────────────────────────────
   const firstScaleTab = document.querySelector('.scale-tab');
   if (firstScaleTab) showScale('phq9', firstScaleTab);
 
-  // Show first specialty
+  // ── Show first specialty ────────────────────────────────────────────────────
   const firstSpecTab = document.querySelector('.specialty-tab');
   if (firstSpecTab) showSpecialty('child', firstSpecTab);
 });
