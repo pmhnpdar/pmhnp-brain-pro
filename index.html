@@ -2946,7 +2946,7 @@ body.light .section-divider h2 { color: #0f1a2e; }
 
   <div class="sub-tabs">
     <button class="sub-tab active" onclick="showSubtab('integrative','symp')" data-testid="subtab-symp"><i class="fa fa-crosshairs"></i> Symptom Targets</button>
-    <button class="sub-tab" onclick="showSubtab('integrative','supps')" data-testid="subtab-supps"><i class="fa fa-leaf"></i> Supplements DB</button>
+    <button class="sub-tab" onclick="showSubtab('integrative','supps'); renderSupplements();" data-testid="subtab-supps"><i class="fa fa-leaf"></i> Supplements DB</button>
     <button class="sub-tab" onclick="showSubtab('integrative','labs')" data-testid="subtab-labs"><i class="fa fa-vial"></i> Labs &amp; Biomarkers</button>
     <button class="sub-tab" onclick="showSubtab('integrative','lifestyle')" data-testid="subtab-lifestyle"><i class="fa fa-heartbeat"></i> Lifestyle &amp; NS</button>
   </div>
@@ -6461,6 +6461,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // ── Show first specialty ────────────────────────────────────────────────────
   const firstSpecTab = document.querySelector('.specialty-tab');
   if (firstSpecTab) showSpecialty('child', firstSpecTab);
+
+  // ── Init Supplements DB ──────────────────────────────────────────────────────
+  renderSupplements();
 });
 </script>
 
