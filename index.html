@@ -1048,8 +1048,9 @@ body.light .section-divider h2 { color: #0f1a2e; }
 
 <!-- ═══════════════════════════════════════════ MAIN -->
 <div class="main-content">
+<div id="sidebar-overlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
 <div class="mobile-topbar">
-  <button class="hamburger-btn" onclick="document.getElementById('sidebar').classList.toggle('open')" data-testid="btn-hamburger">
+  <button class="hamburger-btn" onclick="openSidebar()" data-testid="btn-hamburger">
     <i class="fa fa-bars"></i>
   </button>
   <span class="mobile-brand">PMHNP <strong>Brain</strong> Pro</span>
@@ -5323,16 +5324,7 @@ function openSidebar() {
   document.getElementById('sidebar').classList.add('open');
   document.getElementById('sidebar-overlay').classList.add('visible');
 }
-// Update hamburger to use overlay
-document.addEventListener('DOMContentLoaded', function() {
-  const hbtn = document.querySelector('.hamburger-btn');
-  if (hbtn) hbtn.onclick = function() {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebar-overlay');
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('visible');
-  };
-});
+// Hamburger handled via openSidebar() / closeSidebar() inline
 function showPage(id, navEl) {
   // Hide all pages via class (consistent — no inline style conflicts)
   document.querySelectorAll('.page').forEach(p => {
