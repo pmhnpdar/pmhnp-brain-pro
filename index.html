@@ -4906,7 +4906,404 @@ const MEDS = [
     pearl: 'For depression, EPA >60% of formula is most effective (Carlat pearl). Child ADHD evidence strongest for combined omega-3 + omega-6. Meta-analyses support adjunctive use in MDD. Nordic Naturals and Carlson Labs are high-quality brands. For ADHD in children: at least 1g EPA/day. Enteric-coated formulas reduce fishy burps.',
     monitoring: 'Bleeding parameters if on anticoagulants; triglycerides (may decrease with high doses)',
     source: 'Carlat Child Med Fact Book 2023'
+  },
+  // ---- ADDITIONAL ANTIDEPRESSANTS ----
+  {
+    name: 'Paroxetine', brand: 'Paxil / Paxil CR / Pexeva', cat: 'antidepressant', cls: 'SSRI',
+    moa: 'Potent SERT inhibitor; significant muscarinic (anticholinergic), H1, and alpha-1 antagonism compared to other SSRIs',
+    indication: 'MDD, Panic Disorder, Social Anxiety Disorder, OCD, GAD, PTSD, PMDD',
+    start: '10-20 mg/day', target: '20-60 mg/day', titration: '10 mg every 1-2 weeks',
+    common: 'Sedation, weight gain, constipation, dry mouth, sexual dysfunction, sweating',
+    serious: 'One of highest discontinuation syndrome risks of all SSRIs; QTc (minimal)',
+    blackbox: 'Suicidality in youth <25',
+    cyp: 'Strong 2D6 inhibitor; 2D6 substrate (self-inhibiting - nonlinear kinetics)',
+    pearl: 'Broadest FDA indications of any SSRI. Worst weight gain and discontinuation syndrome of SSRIs. AVOID in pregnancy (cardiac defects). Self-inhibiting via 2D6 = nonlinear dose-response. Short half-life, must taper slowly. Not first choice due to side effect profile and DDI potential.'
+  },
+  {
+    name: 'Citalopram', brand: 'Celexa', cat: 'antidepressant', cls: 'SSRI',
+    moa: 'SERT inhibitor (racemic - R+S enantiomers); S-enantiomer is the active component (= escitalopram)',
+    indication: 'MDD (FDA); OCD, panic, social anxiety, GAD (off-label)',
+    start: '10-20 mg/day', target: '20-40 mg/day', titration: '10-20 mg every 2 weeks',
+    common: 'Nausea, insomnia, somnolence, dry mouth, sexual dysfunction',
+    serious: 'QTc prolongation (dose-dependent) - FDA max 40 mg/day (20 mg in elderly, hepatic impairment, or CYP2C19 PMs)',
+    blackbox: 'Suicidality in youth <25',
+    cyp: '2C19 substrate; 2D6 weak inhibitor',
+    pearl: 'Lower DDI profile but QTc concern limits dose. Escitalopram (S-enantiomer) is cleaner - prefer it for most patients. Max 20 mg/day in: >60 yo, hepatic impairment, CYP2C19 PMs, concurrent CYP2C19 inhibitors. Baseline EKG if cardiac risk factors.'
+  },
+  {
+    name: 'Desvenlafaxine', brand: 'Pristiq', cat: 'antidepressant', cls: 'SNRI',
+    moa: 'Active metabolite of venlafaxine; balanced SNRI; minimal CYP2D6 metabolism unlike parent compound',
+    indication: 'MDD',
+    start: '50 mg/day', target: '50-100 mg/day', titration: 'Fixed 50 mg starting and often maintenance dose',
+    common: 'Nausea, dizziness, insomnia, sexual dysfunction, increased sweating, BP elevation',
+    serious: 'Discontinuation syndrome (similar to venlafaxine); hypertension',
+    blackbox: 'Suicidality in youth <25',
+    cyp: 'Minimally metabolized by CYP3A4; NOT a significant CYP2D6 substrate (unlike venlafaxine) - fewer DDIs',
+    pearl: 'Advantage over venlafaxine: minimal CYP2D6 metabolism - fewer DDIs; more predictable pharmacokinetics. Comes as extended-release only. Minimal benefit switching from venlafaxine (same active metabolite). Higher NE at 100 mg vs 50 mg. Monitor BP.'
+  },
+  {
+    name: 'Amitriptyline', brand: 'Elavil', cat: 'antidepressant', cls: 'TCA',
+    moa: 'Inhibits serotonin and norepinephrine reuptake; potent H1, muscarinic, and alpha-1 antagonism; sodium channel blockade at high doses',
+    indication: 'MDD, neuropathic pain, migraine prophylaxis, IBS, fibromyalgia, insomnia (off-label); enuresis in children',
+    start: '10-25 mg QHS', target: '75-150 mg/day (depression); 10-75 mg QHS (pain/insomnia)',
+    titration: '25 mg every 1-2 weeks',
+    common: 'Sedation, weight gain, dry mouth, constipation, urinary retention, orthostatic hypotension, blurred vision',
+    serious: 'Cardiotoxicity (QTc prolongation, heart block, arrhythmia); lethal in overdose; seizures; anticholinergic toxidrome',
+    blackbox: 'Suicidality in youth <25',
+    cyp: '2D6 substrate; 2C19 substrate; 2D6 inhibitor',
+    pearl: 'Very sedating - useful low-dose (10-25 mg) for insomnia and pain. NOT first-line for depression due to side effect and safety profile. Beers Criteria - avoid in elderly. Lethal in overdose - limit dispensing in suicidal patients. Serum level (amitriptyline + nortriptyline) 80-200 ng/mL. EKG before initiating.'
+  },
+  {
+    name: 'Nortriptyline', brand: 'Pamelor', cat: 'antidepressant', cls: 'TCA',
+    moa: 'Active metabolite of amitriptyline; predominantly NE reuptake inhibitor; less anticholinergic and less sedating than amitriptyline',
+    indication: 'MDD, neuropathic pain, migraine prevention, smoking cessation (augment), post-herpetic neuralgia',
+    start: '10-25 mg QHS', target: '50-150 mg/day', titration: '25 mg every 1-2 weeks',
+    common: 'Dry mouth, constipation, urinary retention, orthostasis, blurred vision, sedation (less than amitriptyline)',
+    serious: 'QTc prolongation, cardiotoxicity, seizures; lethal in overdose',
+    blackbox: 'Suicidality in youth <25',
+    cyp: '2D6 substrate and inhibitor',
+    pearl: 'Best-tolerated TCA - less anticholinergic and sedating than amitriptyline. Narrow therapeutic window: serum level 50-150 ng/mL. Useful in elderly with caution. EKG before initiating. Useful for smoking cessation augmentation and post-herpetic neuralgia.'
+  },
+  {
+    name: 'Imipramine', brand: 'Tofranil', cat: 'antidepressant', cls: 'TCA',
+    moa: 'Balanced SNRI (TCA); moderate anticholinergic and H1 activity; sodium channel blocker at toxic doses',
+    indication: 'MDD, panic disorder, nocturnal enuresis (children), ADHD (off-label)',
+    start: '25-50 mg/day', target: '75-300 mg/day', titration: '25-50 mg every 1-2 weeks',
+    common: 'Sedation, dry mouth, constipation, orthostatic hypotension, weight gain, urinary retention',
+    serious: 'Cardiac toxicity, QTc, seizures; lethal in overdose',
+    blackbox: 'Suicidality in youth <25',
+    cyp: '2D6 substrate; 2C19 substrate; 2D6 inhibitor',
+    pearl: 'First TCA used clinically. Most studied TCA for panic disorder. Desipramine is active metabolite. EKG required. Serum level 150-300 ng/mL (imipramine + desipramine). NOT first-line. Low dose (10-25 mg) used for pediatric enuresis. Beers Criteria - avoid in elderly.'
+  },
+  {
+    name: 'Desipramine', brand: 'Norpramin', cat: 'antidepressant', cls: 'TCA',
+    moa: 'Predominantly NE reuptake inhibitor; active metabolite of imipramine; least anticholinergic TCA',
+    indication: 'MDD, ADHD (off-label), neuropathic pain, cocaine use disorder (adjunct)',
+    start: '25-50 mg/day', target: '100-300 mg/day', titration: '25-50 mg every 1-2 weeks',
+    common: 'Less sedation and anticholinergic effects than other TCAs; orthostasis, dry mouth, constipation (milder)',
+    serious: 'QTc prolongation; cardiac arrhythmia; seizures; lethal in overdose',
+    blackbox: 'Suicidality in youth <25; sudden cardiac death in children (FDA warning)',
+    cyp: '2D6 substrate and inhibitor',
+    pearl: 'Least anticholinergic TCA - preferred for chronic pain when anticholinergic effects problematic. Strong evidence for cocaine craving reduction (off-label). NOT approved for pediatric ADHD due to sudden death risk. Serum level 125-300 ng/mL. EKG required.'
+  },
+  // ---- ADDITIONAL MOOD STABILIZERS / ANTICONVULSANTS ----
+  {
+    name: 'Topiramate', brand: 'Topamax', cat: 'mood', cls: 'Anticonvulsant / Weight-modulating agent',
+    moa: 'Sodium channel blockade; GABA-A enhancement; glutamate (AMPA/kainate) inhibition; carbonic anhydrase inhibition; modest weight-reducing effects',
+    indication: 'Epilepsy, migraine prophylaxis; off-label: bipolar (esp. with obesity), binge eating, PTSD, alcohol use disorder',
+    start: '25 mg/day', target: '100-400 mg/day (BD/migraine: 50-200 mg/day)', titration: '25 mg/week increments',
+    common: 'Cognitive slowing ("Dope-amax"), paresthesias, weight loss, word-finding difficulty, fatigue, nausea',
+    serious: 'Kidney stones, acute angle-closure glaucoma (emergency), metabolic acidosis, hyperthermia; teratogenic (cleft palate)',
+    blackbox: 'Suicidality (class AED warning)',
+    cyp: '3A4 substrate; minimal 2C19 inhibitor; reduces estrogen levels - OCP failure risk',
+    pearl: 'Cognitive side effects significant - titrate slowly. Weight loss is advantage when bipolar + obesity. Kidney stones: hydrate well. Reduces oral contraceptive efficacy. NOT FDA-approved for bipolar. Part of Qsymia (phentermine/topiramate) for obesity.'
+  },
+  {
+    name: 'Carbamazepine', brand: 'Tegretol / Equetro / Carbatrol / Epitol', cat: 'mood', cls: 'Mood Stabilizer / Anticonvulsant',
+    moa: 'Voltage-gated sodium channel blocker; reduces neuronal hyperexcitability; limbic system effects for mood stabilization',
+    indication: 'Bipolar Disorder (FDA: Equetro for mania/mixed), Epilepsy, Trigeminal neuralgia',
+    start: '200 mg BID', target: '400-1600 mg/day; serum level 4-12 mcg/mL', titration: '200 mg every 1-2 weeks',
+    common: 'Dizziness, diplopia, ataxia, nausea, sedation, weight gain, hyponatremia',
+    serious: 'Aplastic anemia, agranulocytosis (rare but life-threatening); Stevens-Johnson Syndrome (SJS) - especially HLA-B*1502 (Asian populations); teratogenicity (neural tube defects); SIADH',
+    blackbox: 'Aplastic anemia/agranulocytosis; SJS/TEN (fatal skin reactions)',
+    cyp: 'Potent 3A4 inducer (autoinduces own metabolism - recheck levels after 2-4 weeks); 2B6 and 2C9 inducer. MAJOR DDIs - reduces many drugs including antipsychotics, antidepressants, hormonal contraceptives',
+    pearl: 'HLA-B*1502 testing before use in Asian patients (FDA). Potent enzyme inducer - watch all DDIs. Autoinduction: levels drop after 2-4 weeks, recheck and adjust. Hyponatremia especially in elderly. Not first-line due to DDI burden and monitoring. Equetro is FDA-approved brand for bipolar mania.'
+  },
+  // ---- ADDITIONAL ANTIPSYCHOTICS ----
+  {
+    name: 'Olanzapine/Samidorphan', brand: 'Lybalvi', cat: 'antipsychotic', cls: 'Atypical Antipsychotic + Opioid receptor antagonist',
+    moa: 'Olanzapine: D2/5-HT2A antagonist; Samidorphan: opioid receptor antagonist added to mitigate olanzapine-induced weight gain via mu/kappa opioid pathways',
+    indication: 'Schizophrenia, Bipolar I Disorder (mania, mixed episodes, maintenance with lithium/VPA)',
+    start: '5-10 mg/day (olanzapine equivalent)', target: '10-20 mg/day', titration: 'Titrate per clinical response (similar to olanzapine)',
+    common: 'Sedation, dry mouth, constipation, orthostasis; weight gain attenuated vs. olanzapine alone',
+    serious: 'Metabolic syndrome (still present), QTc, EPS (rare), NMS; precipitates withdrawal in opioid-dependent patients',
+    blackbox: 'Elderly dementia-related psychosis mortality',
+    cyp: '1A2 substrate (primary); 2D6 substrate (minor); CYP1A2 inducers (smoking) reduce olanzapine levels',
+    pearl: 'CONTRAINDICATED with opioids and in opioid-dependent patients - samidorphan precipitates withdrawal. Weight gain is less than olanzapine alone but still significant. Document opioid use history before prescribing. Same metabolic monitoring as olanzapine. Cost vs. generic olanzapine is a consideration.'
+  },
+  // ---- ADDITIONAL ADHD MEDICATIONS ----
+  {
+    name: 'Dexmethylphenidate', brand: 'Focalin / Focalin XR', cat: 'stimulant', cls: 'Stimulant (CII)',
+    moa: 'D-isomer of methylphenidate; blocks dopamine and norepinephrine reuptake; more potent than racemic methylphenidate (half the dose needed)',
+    indication: 'ADHD (ages 6+)',
+    start: '2.5 mg BID (IR); 5 mg/day (XR)', target: '20 mg/day (IR); 20-30 mg/day (XR)', titration: '2.5-5 mg weekly',
+    common: 'Decreased appetite, insomnia, headache, abdominal pain, irritability, dry mouth',
+    serious: 'Cardiovascular effects (tachycardia, hypertension); psychiatric symptoms at high doses; growth suppression; abuse potential',
+    blackbox: 'High abuse potential (CII)',
+    cyp: 'Metabolized by plasma esterases (not CYP450) - minimal DDI profile',
+    pearl: 'D-isomer of methylphenidate = approximately 2x more potent. XR has bimodal release (4h + 4h pulse). Useful when racemic methylphenidate partial response - may get better effect at lower dose. Same class monitoring as all stimulants (BP, HR, height/weight).'
+  },
+  {
+    name: 'Serdexmethylphenidate/Dexmethylphenidate', brand: 'Azstarys', cat: 'stimulant', cls: 'Stimulant (CII)',
+    moa: 'Prodrug of dexmethylphenidate + immediate-release dexmethylphenidate; triphasic release; serdexmethylphenidate cleaved by GI enzymes over 13h',
+    indication: 'ADHD (ages 6+)',
+    start: '26.1 mg/5 mg daily', target: '39.2/7.8 mg or 52.3/10.4 mg daily', titration: 'Weekly titration per response',
+    common: 'Decreased appetite, insomnia, irritability, abdominal pain, tachycardia',
+    serious: 'Cardiovascular effects; psychiatric activation; abuse potential (less than IR due to prodrug design)',
+    blackbox: 'High abuse potential (CII)',
+    cyp: 'GI esterase cleavage; minimal CYP involvement',
+    pearl: 'Prodrug design: harder to abuse intranasally (requires enzymatic GI activation). Triphasic release covers morning through evening. Once-daily dosing advantage. Doses expressed as serdexmethylphenidate/dexmethylphenidate mg.'
+  },
+  // ---- WAKEFULNESS-PROMOTING AGENTS ----
+  {
+    name: 'Modafinil', brand: 'Provigil', cat: 'stimulant', cls: 'Wakefulness-promoting agent (CIV)',
+    moa: 'Increases dopamine (inhibits DAT), norepinephrine, histamine, orexin neurotransmission; promotes wakefulness via hypothalamic pathways',
+    indication: 'Narcolepsy, Obstructive Sleep Apnea (adjunct to CPAP), Shift Work Sleep Disorder; off-label: ADHD, TRD augmentation, fatigue in MS',
+    start: '100 mg/day', target: '200 mg/day (max 400 mg)', titration: '100 mg every 1-2 weeks',
+    common: 'Headache, nausea, insomnia, dizziness, anxiety, rhinitis',
+    serious: 'SJS/TEN (rare), angioedema; psychiatric symptoms; abuse potential (CIV, lower than amphetamines)',
+    blackbox: 'None (SJS/TEN warning in prescribing info)',
+    cyp: '3A4 substrate; 3A4 inducer (reduces many drug levels including OCPs); 2C19 inhibitor',
+    pearl: 'Lower abuse potential than traditional stimulants (CIV vs. CII). CYP3A4 induction reduces OCP efficacy - critical counseling. Useful when stimulants contraindicated (severe anxiety, cardiac, abuse risk). Off-label TRD augmentation - modest evidence. Once daily, morning dosing preferred.'
+  },
+  {
+    name: 'Armodafinil', brand: 'Nuvigil', cat: 'stimulant', cls: 'Wakefulness-promoting agent (CIV)',
+    moa: 'R-enantiomer of modafinil; longer half-life and more consistent plasma levels; same mechanism of wakefulness promotion',
+    indication: 'Narcolepsy, Obstructive Sleep Apnea (adjunct to CPAP), Shift Work Sleep Disorder; off-label: ADHD, TRD augmentation, bipolar depression adjunct',
+    start: '50-75 mg/day', target: '150-250 mg/day', titration: '50 mg every 1-2 weeks',
+    common: 'Headache, nausea, dizziness, insomnia, dry mouth, anxiety',
+    serious: 'SJS/TEN (rare), angioedema, psychiatric symptoms; CIV abuse potential',
+    blackbox: 'None',
+    cyp: '3A4 substrate; 3A4 inducer; 2C19 inhibitor (same as modafinil)',
+    pearl: 'R-enantiomer - longer half-life vs. modafinil; better for shift-work or narcolepsy requiring evening coverage. Same OCP interaction warning as modafinil. Bipolar depression adjunct has emerging small-study evidence.'
+  },
+  // ---- BENZODIAZEPINES ----
+  {
+    name: 'Alprazolam', brand: 'Xanax / Xanax XR', cat: 'anxiolytic', cls: 'Benzodiazepine (CIV)',
+    moa: 'Positive GABA-A allosteric modulator; enhances chloride ion conductance; anxiolytic, hypnotic, anticonvulsant, muscle relaxant',
+    indication: 'Panic Disorder (FDA), GAD (FDA); off-label: acute anxiety',
+    start: '0.25-0.5 mg TID (anxiety); 0.5 mg TID (panic)', target: '0.5-4 mg/day (anxiety); up to 4-6 mg/day in panic disorder', titration: '0.25-0.5 mg every 3 days',
+    common: 'Sedation, dizziness, cognitive impairment, ataxia, memory impairment, psychomotor slowing',
+    serious: 'Dependence, tolerance, life-threatening withdrawal (seizures, delirium); respiratory depression with opioids; falls; overdose risk',
+    blackbox: 'Concomitant use with opioids: respiratory depression and death',
+    cyp: '3A4 substrate - potent 3A4 inhibitors (azole antifungals, macrolides) dramatically increase levels',
+    pearl: 'Short half-life (6-27h) - more breakthrough anxiety and greater dependence/withdrawal risk vs. long-acting BZDs. High abuse liability. Avoid long-term use. Have defined taper plan from day 1. NEVER abruptly stop - life-threatening withdrawal. Maudsley: slow taper 5-10% per 2-4 weeks. XR form has smoother kinetics for panic disorder.'
+  },
+  {
+    name: 'Diazepam', brand: 'Valium', cat: 'anxiolytic', cls: 'Benzodiazepine (CIV)',
+    moa: 'GABA-A positive allosteric modulator; long-acting with active metabolites (desmethyldiazepam, oxazepam)',
+    indication: 'Anxiety disorders, alcohol withdrawal (first-line), seizures, muscle spasm, procedural sedation',
+    start: '2-5 mg BID-TID (anxiety)', target: '5-40 mg/day depending on indication', titration: 'Individualized per indication',
+    common: 'Sedation, ataxia, amnesia, cognitive impairment, dizziness',
+    serious: 'Respiratory depression, dependence, withdrawal; accumulation in elderly (long half-life + active metabolites)',
+    blackbox: 'Concomitant use with opioids',
+    cyp: '2C19 substrate; 3A4 substrate; active metabolites (desmethyldiazepam t1/2 36-200h)',
+    pearl: 'Long half-life (20-100h) + active metabolites - excellent for alcohol withdrawal (self-tapering effect). Avoid in elderly (Beers Criteria) - accumulates, falls, cognitive impairment. Preferred for alcohol withdrawal CIWA protocol. Useful for acute muscle spasm.'
+  },
+  {
+    name: 'Temazepam', brand: 'Restoril', cat: 'anxiolytic', cls: 'Benzodiazepine (CIV)',
+    moa: 'GABA-A positive allosteric modulator; intermediate half-life; no active metabolites; glucuronidation metabolism',
+    indication: 'Short-term treatment of insomnia (FDA)',
+    start: '7.5-15 mg QHS', target: '15-30 mg QHS', titration: 'Start low, especially in elderly',
+    common: 'Next-day sedation, dizziness, cognitive impairment, ataxia',
+    serious: 'Dependence, withdrawal, respiratory depression; falls in elderly',
+    blackbox: 'Concomitant use with opioids',
+    cyp: 'Glucuronidation (not CYP-dependent) - minimal CYP DDIs; no active metabolites',
+    pearl: 'Intermediate half-life (8-20h), no active metabolites - preferred over long-acting BZDs for insomnia. Short-term only (2-4 weeks max). Glucuronidation metabolism - useful in hepatic impairment and elderly polypharmacy. LOT rule: Lorazepam, Oxazepam, Temazepam - all glucuronidated.'
+  },
+  {
+    name: 'Chlordiazepoxide', brand: 'Librium', cat: 'anxiolytic', cls: 'Benzodiazepine (CIV)',
+    moa: 'GABA-A positive allosteric modulator; long-acting with multiple active metabolites; first clinically used benzodiazepine',
+    indication: 'Alcohol withdrawal syndrome (FDA), anxiety disorders',
+    start: '5-25 mg TID-QID (alcohol withdrawal)', target: 'CIWA-guided dosing, up to 300-400 mg/day acutely', titration: 'Taper over 5-7 days for alcohol withdrawal',
+    common: 'Sedation, ataxia, confusion, cognitive impairment',
+    serious: 'Respiratory depression, over-sedation in elderly; accumulation (long half-life + active metabolites)',
+    blackbox: 'Concomitant use with opioids',
+    cyp: '3A4 substrate; active metabolites (desmethylchlordiazepoxide, nordiazepam, oxazepam)',
+    pearl: 'Historical gold standard for alcohol withdrawal (long half-life = self-tapering). Often replaced by diazepam or lorazepam in practice. Very long half-life + active metabolites = high accumulation risk in elderly or hepatic impairment. NOT ideal for chronic anxiety.'
+  },
+  {
+    name: 'Oxazepam', brand: 'Serax', cat: 'anxiolytic', cls: 'Benzodiazepine (CIV)',
+    moa: 'GABA-A positive allosteric modulator; short-acting; no active metabolites; glucuronidation metabolism',
+    indication: 'Anxiety, alcohol withdrawal (FDA); insomnia (off-label)',
+    start: '10-15 mg TID-QID', target: '30-120 mg/day', titration: 'Individualized',
+    common: 'Sedation, dizziness, cognitive effects',
+    serious: 'Dependence, withdrawal, respiratory depression',
+    blackbox: 'Concomitant use with opioids',
+    cyp: 'Glucuronidation - not CYP metabolized; no active metabolites',
+    pearl: 'LOT rule: Lorazepam, Oxazepam, Temazepam - all glucuronidated. Preferred in hepatic impairment or elderly (less accumulation). Slower onset - less abuse potential. Preferred for alcohol withdrawal in liver disease or elderly patients.'
+  },
+  // ---- SLEEP AGENTS ----
+  {
+    name: 'Eszopiclone', brand: 'Lunesta', cat: 'sleep', cls: 'Non-benzodiazepine hypnotic / Z-drug (CIV)',
+    moa: 'GABA-A modulator (non-BZD); preferential binding to alpha-1 subunit; cyclopyrrolone class',
+    indication: 'Insomnia - difficulty falling and/or staying asleep (FDA)',
+    start: '1 mg QHS', target: '1-3 mg QHS (max 2 mg in elderly)', titration: 'Titrate up if needed',
+    common: 'Unpleasant metallic/bitter taste (unique to eszopiclone), dizziness, next-day somnolence, headache',
+    serious: 'Complex sleep behaviors (sleepwalking, sleep-driving, sleep-eating - class warning); dependence; respiratory depression with CNS depressants',
+    blackbox: 'Complex sleep behaviors (sleep-driving, sleep-eating, making phone calls while not awake)',
+    cyp: '3A4 substrate; 2E1 substrate',
+    pearl: 'Only FDA-approved hypnotic WITHOUT defined limit on duration of use. Unpleasant taste is most distinctive side effect - counsel patients. Less next-morning impairment vs. older Z-drugs at therapeutic doses. Maudsley recommends gradual tapering after regular use. Complex sleep behavior risk applies to all Z-drugs - avoid alcohol/sedatives.'
+  },
+  {
+    name: 'Zaleplon', brand: 'Sonata', cat: 'sleep', cls: 'Non-benzodiazepine hypnotic / Z-drug (CIV)',
+    moa: 'GABA-A alpha-1 subunit positive modulator; ultra-short acting (t1/2 approximately 1h)',
+    indication: 'Insomnia - sleep onset (FDA)',
+    start: '5 mg QHS', target: '10 mg QHS (elderly: 5 mg)', titration: 'Not typically titrated',
+    common: 'Dizziness, headache, amnesia, paresthesias; minimal next-day impairment due to ultra-short half-life',
+    serious: 'Complex sleep behaviors; abuse/dependence',
+    blackbox: 'Complex sleep behaviors',
+    cyp: '3A4 substrate; aldehyde oxidase metabolism',
+    pearl: 'Ultra-short half-life (1h) - minimal next-day carryover. Can be taken in the middle of the night IF patient has at least 4 hours remaining sleep time. NOT effective for sleep maintenance (too short-acting). Useful for transient insomnia or patients sensitive to next-morning grogginess. Still carries dependence risk.'
+  },
+  {
+    name: 'Ramelteon', brand: 'Rozerem', cat: 'sleep', cls: 'Melatonin receptor agonist (MT1/MT2)',
+    moa: 'MT1 (promotes sleep onset, reduces wake tendency) and MT2 (circadian phase-shifting) receptor agonist; no GABAergic activity - not a controlled substance',
+    indication: 'Insomnia characterized by difficulty with sleep onset (FDA); studied for circadian rhythm disorders',
+    start: '8 mg QHS (30 min before bedtime)', target: '8 mg QHS', titration: 'Fixed dose - no titration',
+    common: 'Dizziness, somnolence, fatigue, nausea; generally well-tolerated',
+    serious: 'Prolactin elevation, testosterone decrease with chronic use (rare); CONTRAINDICATED with fluvoxamine',
+    blackbox: 'None',
+    cyp: '1A2 primary substrate; 3A4, 2C9 minor substrates. CRITICAL: fluvoxamine (potent 1A2 inhibitor) co-administration CONTRAINDICATED - dramatically increases ramelteon exposure',
+    pearl: 'Only non-scheduled sleep aid with melatonin mechanism. No abuse potential, no dependence. Ideal for patients with SUD concerns or benzodiazepine avoidance. NOT effective for sleep maintenance - only sleep onset. Absolute contraindication with fluvoxamine. Safe in elderly without Beers Criteria concern.'
+  },
+  {
+    name: 'Doxepin low dose', brand: 'Silenor', cat: 'sleep', cls: 'Tricyclic / Selective H1 antihistamine (low-dose)',
+    moa: 'At 3-6 mg (Silenor), highly selective H1 antihistamine - promotes sleep maintenance; at antidepressant doses (75-300 mg), full TCA profile',
+    indication: 'Insomnia with sleep maintenance difficulty (FDA for Silenor 3-6 mg); MDD and anxiety at high doses',
+    start: '3 mg QHS', target: '3-6 mg QHS', titration: 'Fixed dose; 6 mg if 3 mg insufficient',
+    common: 'Somnolence, nausea; minimal anticholinergic at low doses',
+    serious: 'At low doses: generally safe; avoid in acute narrow-angle glaucoma or severe urinary retention; avoid with MAOIs',
+    blackbox: 'Suicidality at antidepressant doses; not relevant at low sleep dose',
+    cyp: '2D6, 2C19, 1A2 substrates; 2D6 inhibitor at higher doses',
+    pearl: 'Unique mechanism - purely H1-mediated at low dose. No controlled substance scheduling - unlike Z-drugs/benzos. No abuse potential. FDA-approved specifically for sleep maintenance. Take within 30 min of bed; no high-fat meal within 3h. Can be used in elderly with appropriate monitoring.'
+  },
+  {
+    name: 'Clonidine for insomnia ADHD', brand: 'Catapres / Kapvay', cat: 'stimulant', cls: 'Alpha-2 agonist (non-stimulant)',
+    moa: 'Central alpha-2 adrenergic agonist - reduces NE release from locus coeruleus; sedation, reduced sympathetic outflow, reduced ADHD symptoms via prefrontal cortex modulation',
+    indication: 'ADHD (Kapvay ER, ages 6-17, FDA); Hypertension; off-label: insomnia, PTSD nightmares, opioid/stimulant withdrawal, Tourette syndrome',
+    start: '0.1 mg QHS (insomnia/ADHD)', target: '0.1-0.4 mg/day (ADHD); 0.1-0.2 mg QHS (insomnia)',
+    titration: '0.1 mg weekly increments for ADHD',
+    common: 'Sedation, dry mouth, dizziness, bradycardia, hypotension, constipation, rebound hypertension if stopped abruptly',
+    serious: 'Rebound hypertension with abrupt discontinuation (DO NOT stop abruptly); bradyarrhythmia; hypotension',
+    blackbox: 'None',
+    cyp: 'Not significantly CYP metabolized',
+    pearl: 'Non-stimulant ADHD option - especially useful for ADHD + tic disorder, ADHD + anxiety, or ADHD + severe insomnia. Evening dosing for sleep benefits. MUST taper - abrupt discontinuation causes rebound hypertension. Monitor BP and HR. Guanfacine (Intuniv) is alpha-2 agonist alternative with less sedation.'
+  },
+  {
+    name: 'Gabapentin for insomnia', brand: 'Neurontin / Gralise / Horizant', cat: 'sleep', cls: 'Alpha-2-delta calcium channel ligand (Gabapentinoid)',
+    moa: 'Binds voltage-gated calcium channel alpha-2-delta subunit - reduces excitatory neurotransmitter release; increases slow-wave sleep; anxiolytic and analgesic properties',
+    indication: 'Epilepsy, postherpetic neuralgia (FDA); off-label: insomnia, anxiety, alcohol withdrawal, restless legs, neuropathic pain, fibromyalgia',
+    start: '100-300 mg QHS (insomnia)', target: '300-1800 mg/day (varies by indication)',
+    titration: '100-300 mg every 3-7 days',
+    common: 'Sedation, dizziness, ataxia, peripheral edema, weight gain, cognitive blunting',
+    serious: 'Respiratory depression with opioids/CNS depressants (SIGNIFICANT risk); suicidality (class AED warning); physical dependence with abrupt discontinuation; increasing abuse/misuse potential',
+    blackbox: 'Respiratory depression risk with CNS depressants or respiratory disease',
+    cyp: 'Not CYP metabolized; renally excreted - adjust for renal impairment',
+    pearl: 'Increases slow-wave sleep - clinically useful for insomnia with pain or anxiety comorbidity. NOT FDA-approved for insomnia or anxiety - off-label. Respiratory depression with opioids - CRITICAL DDI. Adjust dose in renal impairment. Maudsley recommends gradual taper after regular use.'
+  },
+  {
+    name: 'Melatonin', brand: 'Various OTC / Circadin ER', cat: 'sleep', cls: 'Melatonin supplement / Chronobiotic',
+    moa: 'Endogenous pineal hormone; MT1/MT2 receptor agonist; regulates circadian rhythm and sleep-wake cycle; weak hypnotic effect',
+    indication: 'Jet lag, circadian rhythm sleep disorders, insomnia (adjunct); off-label: insomnia in children/ASD, delayed sleep phase disorder',
+    start: '0.5-1 mg (sleep phase disorders); 2-5 mg (insomnia)', target: '0.5-5 mg QHS', titration: 'Not typically titrated - start low',
+    common: 'Daytime grogginess if taken too early, headache, dizziness, nausea; generally very well-tolerated',
+    serious: 'Minimal; theoretical concern with autoimmune disorders; possible interaction with anticoagulants',
+    blackbox: 'None',
+    cyp: '1A2 substrate; 2C19 substrate',
+    pearl: 'Timing is key: for sleep-phase disorders take 4-6h BEFORE desired sleep onset. For general insomnia, 30-60 min before bed. Lower doses (0.5-1 mg) more physiologic than high OTC doses (5-10 mg). Not a sedative - works on circadian regulation. No dependence or abuse potential. Generally safe in all populations.'
+  },
+  // ---- SUBSTANCE USE DISORDER MEDICATIONS ----
+  {
+    name: 'Buprenorphine/Naloxone', brand: 'Suboxone / Zubsolv', cat: 'substance_use', cls: 'Partial opioid agonist / OUD treatment',
+    moa: 'Buprenorphine: partial mu-opioid agonist + kappa antagonist; very high receptor affinity; naloxone: opioid antagonist (minimal sublingual bioavailability - included to deter IV misuse)',
+    indication: 'Opioid Use Disorder (OUD) - Medication-Assisted Treatment; off-label: chronic pain',
+    start: 'Induction: 2-4 mg/0.5-1 mg SL (must be in mild-moderate withdrawal, COWS >=8)', target: '8-24 mg/day maintenance (most patients: 16 mg/day)',
+    titration: 'Increase 2-4 mg every 1-2 hours on induction day; adjust first week; stable by week 2-4',
+    common: 'Headache, constipation, nausea, sweating, insomnia, precipitated withdrawal if induced too early',
+    serious: 'Respiratory depression with benzodiazepines, alcohol, or full opioids; precipitated withdrawal if given before adequate withdrawal',
+    blackbox: 'Respiratory depression risk with CNS depressants',
+    cyp: '3A4 substrate; 3A4 inhibitors increase buprenorphine levels',
+    pearl: 'Gold standard for OUD in outpatient settings. Partial agonist = ceiling effect on respiratory depression - safer than methadone. MUST wait for COWS >=8 before induction - precipitated withdrawal is severe. Extended-release injectable (Sublocade) for adherence. X-waiver replaced by standard DEA license. Naloxone in film has minimal SL absorption - deters IV diversion.'
+  },
+  {
+    name: 'Methadone', brand: 'Dolophine / Methadose', cat: 'substance_use', cls: 'Full opioid agonist / OUD treatment',
+    moa: 'Full mu-opioid agonist + NMDA receptor antagonist; very long half-life (24-48h); eliminates craving, blocks euphoria from illicit opioids',
+    indication: 'Opioid Use Disorder (dispensed through certified OTPs only); Chronic pain (different regulations)',
+    start: 'OTP-guided induction: typically 10-30 mg/day initially', target: '60-120 mg/day (individual titration)',
+    titration: 'OTP protocol - increase no more than 5-10 mg every 5-7 days; risk of accumulation',
+    common: 'Constipation, sweating, QTc prolongation, sexual dysfunction, weight gain, edema',
+    serious: 'QTc prolongation/Torsades de Pointes (EKG required); respiratory depression; drug accumulation (long half-life - delayed toxicity with rapid titration)',
+    blackbox: 'Respiratory depression; QTc prolongation/cardiac arrhythmia; accidental ingestion by children',
+    cyp: '3A4 substrate (primary); 2D6 substrate; 2C19 substrate; CYP inducers (rifampin, carbamazepine) can precipitate withdrawal',
+    pearl: 'Most effective for severe OUD with daily compliance - observed at clinic. EKG REQUIRED. DO NOT increase dose faster than every 5-7 days - accumulation causes delayed overdose. Highest DDI risk of all OUD medications. Dispensed through SAMHSA-certified OTPs only. Risk-benefit discussion must address respiratory depression.'
+  },
+  {
+    name: 'Varenicline', brand: 'Chantix (brand discontinued US; generic available)', cat: 'substance_use', cls: 'Partial nicotinic acetylcholine receptor agonist / Smoking cessation',
+    moa: 'Partial agonist at alpha4beta2 nicotinic acetylcholine receptors - reduces craving and withdrawal; competitive antagonism blocks nicotine binding and blocks reward',
+    indication: 'Smoking cessation (most effective single pharmacotherapy)',
+    start: '0.5 mg/day x3d then 0.5 mg BID x4d then 1 mg BID', target: '1 mg BID (12-week course; extend to 24 weeks if needed)',
+    titration: 'Fixed titration schedule per package insert',
+    common: 'Nausea (most common - take with food/water), insomnia, abnormal dreams, constipation, headache',
+    serious: 'Cardiovascular: modest increased risk in known CVD; psychiatric effects: depression, suicidal ideation (Black Box Warning)',
+    blackbox: 'Serious neuropsychiatric adverse events including behavior changes, hostility, agitation, depressed mood, and suicidal ideation',
+    cyp: 'Not significantly CYP metabolized; renally excreted - reduce dose in severe renal impairment',
+    pearl: 'Most effective single agent for smoking cessation (NNT approximately 6 vs. placebo). Start 1-2 weeks BEFORE quit date. Nausea mitigated by taking with large meal. EAGLES trial showed neuropsychiatric events were rare and not significantly more than placebo in non-psychiatric patients. Use with caution but not absolutely contraindicated in psychiatric illness. Can combine with NRT for additional benefit.'
+  },
+  {
+    name: 'Nicotine Replacement Therapy', brand: 'Nicoderm CQ / Nicorette / Nicotrol', cat: 'substance_use', cls: 'Nicotine agonist / Smoking cessation',
+    moa: 'Nicotine replacement reduces withdrawal and cravings by maintaining nicotine levels without tobacco combustion; various formulations for different patient needs',
+    indication: 'Smoking cessation; nicotine dependence management',
+    start: 'Patch: 21 mg/24h (>10 cigs/day); 14 mg (<=10 cigs/day). Gum/lozenge: 4 mg (>25 cigs/day); 2 mg',
+    target: 'Step down over 8-12 weeks (patch: 21->14->7 mg)',
+    titration: 'Taper by stepping down patch dose; gum/lozenge as needed for cravings',
+    common: 'Skin irritation (patch), oral irritation/hiccups (gum/lozenge), throat irritation (inhaler)',
+    serious: 'Nicotine toxicity if combined with continued smoking; cardiovascular effects (caution in acute CV events)',
+    blackbox: 'None for OTC formulations',
+    cyp: 'Nicotine is 2A6 substrate; not a significant DDI concern at replacement doses',
+    pearl: 'Combination NRT (patch + short-acting for breakthrough cravings) more effective than monotherapy. OTC - accessible without prescription. Safe in pregnancy vs. continued smoking (risk-benefit favors cessation). Can combine with varenicline or bupropion for maximum effect. Longest-studied smoking cessation pharmacotherapy.'
+  },
+  {
+    name: 'Naloxone', brand: 'Narcan / Kloxxado / Zimhi', cat: 'substance_use', cls: 'Opioid antagonist / Overdose reversal',
+    moa: 'Competitive mu-opioid receptor antagonist; displaces opioids from receptors; reverses respiratory depression, CNS depression, and miosis in opioid overdose',
+    indication: 'Opioid overdose reversal (emergency); co-prescription with opioids (risk reduction)',
+    start: '0.4-2 mg IV/IM/SQ (repeat every 2-3 min as needed)', target: 'Titrate to adequate respiration',
+    titration: 'Intranasal: 4 mg per nostril; may repeat; IM auto-injector: 0.4 mg',
+    common: 'Precipitated opioid withdrawal in opioid-dependent patients (agitation, pain, sweating, vomiting)',
+    serious: 'Pulmonary edema (rare); cardiovascular instability in opioid-dependent patients',
+    blackbox: 'None',
+    cyp: 'Not significantly CYP metabolized; glucuronidation',
+    pearl: 'SHORT duration of action (30-90 min) - shorter than most opioids. Monitor for re-narcotization; may require repeated doses. Co-prescribe Narcan nasal spray with all chronic opioid prescriptions per DEA/CDC guidelines. Educate patients AND family on use. Now available OTC. Kloxxado 8 mg for fentanyl-era overdoses. Zimhi = IM injectable.'
+  },
+  // ---- NEUROACTIVE STEROIDS ----
+  {
+    name: 'Brexanolone', brand: 'Zulresso', cat: 'other', cls: 'Neuroactive steroid / GABA-A positive allosteric modulator',
+    moa: 'Synthetic allopregnanolone (neurosteroid); positive allosteric modulator of synaptic and extrasynaptic GABA-A receptors; restores neurosteroid levels that drop postpartum',
+    indication: 'Postpartum Depression (PPD) - adults (FDA, 2019 - first medication specifically approved for PPD)',
+    start: 'IV infusion: escalated over 60-hour continuous IV infusion', target: '90 mcg/kg/hr (target rate during hours 36-60)',
+    titration: 'Specific protocol: escalate at hrs 0, 4, 12, 24; maintain; taper hours 54-60',
+    common: 'Sedation/somnolence, dizziness, dry mouth, hot flash',
+    serious: 'Excessive sedation, sudden loss of consciousness (requires pulse oximetry monitoring); REMS program required',
+    blackbox: 'Risk of serious harm due to sudden loss of consciousness',
+    cyp: 'Not significantly CYP metabolized',
+    pearl: 'REMS program required - only in certified healthcare facilities with 24/7 monitoring. IV administration. Significant cost. Zuranolone (oral) now available for PPD outpatient use. Remarkable speed - full antidepressant response within 60 hours. Consider when rapid onset is critical.'
+  },
+  // ---- WEIGHT MANAGEMENT ----
+  {
+    name: 'Phentermine/Topiramate ER', brand: 'Qsymia', cat: 'other', cls: 'Weight management / Appetite suppressant combination',
+    moa: 'Phentermine: sympathomimetic amine, releases catecholamines, reduces appetite; Topiramate ER: reduces food intake via AMPA antagonism and multiple anticonvulsant mechanisms',
+    indication: 'Chronic weight management (BMI >=30, or >=27 with weight-related comorbidity) combined with reduced-calorie diet and exercise',
+    start: '3.75 mg/23 mg daily x14d', target: '7.5 mg/46 mg daily (evaluate at 12 weeks; escalate to 15/92 mg if needed)',
+    titration: 'Evaluate at 12 weeks; if <3% weight loss, discontinue or escalate',
+    common: 'Paresthesias, dry mouth, constipation, insomnia, dysgeusia (topiramate); tachycardia (phentermine)',
+    serious: 'Teratogenicity (cleft palate from topiramate); cardiovascular effects; mood/cognitive effects; increased HR; contraindicated in hyperthyroidism, glaucoma, MAOI use',
+    blackbox: 'Teratogenicity (cleft palate risk); contraindicated in pregnancy; negative pregnancy test and contraception required',
+    cyp: 'Phentermine: 3A4 substrate; topiramate: 3A4 substrate/inducer; reduces OCP efficacy',
+    pearl: 'Most effective oral weight loss medication (average 8-10% body weight loss). Monthly pregnancy test required. Contraception counseling essential (topiramate reduces OCP efficacy AND is teratogenic). Monitor HR. Evaluate response at 12 weeks. Schedule IV - phentermine is stimulant component.'
+  },
+  {
+    name: 'Naltrexone/Bupropion ER', brand: 'Contrave', cat: 'other', cls: 'Weight management / Dopamine-opioid combination',
+    moa: 'Bupropion: activates POMC neurons via dopamine/NE reuptake inhibition; Naltrexone: blocks opioid-mediated feedback that inhibits POMC neurons - sustained appetite suppression',
+    indication: 'Chronic weight management (BMI >=30, or >=27 with comorbidity) combined with reduced-calorie diet and exercise',
+    start: '8 mg/90 mg QAM x1wk', target: '16 mg/180 mg BID (2 tablets AM + 2 tablets PM)',
+    titration: 'Weekly titration over 4 weeks to reach target dose',
+    common: 'Nausea (most common during titration), headache, constipation, dizziness, insomnia, dry mouth',
+    serious: 'Seizures (bupropion dose-dependent); hypertension; cardiovascular effects; psychiatric effects',
+    blackbox: 'Suicidality (bupropion component)',
+    cyp: 'Bupropion: moderate 2D6 inhibitor; 2B6 substrate. Naltrexone: not significantly CYP-metabolized',
+    pearl: 'CONTRAINDICATED with opioid use - naltrexone precipitates withdrawal (must be opioid-free). Dual mechanism: dopaminergic + opioid blockade synergistically suppress appetite. Average 5-6% body weight loss. Useful in MDD + obesity - bupropion component may confer mood benefit. Complex titration schedule - counsel carefully.'
   }
+
 ]
 </script>
 <script>
