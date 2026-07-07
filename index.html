@@ -3620,6 +3620,14 @@ body.light .section-divider h2 { color: #0f1a2e; }
     <button class="scale-tab" onclick="showScale('ybocs',this)" data-testid="scale-ybocs">Y-BOCS</button>
     <button class="scale-tab" onclick="showScale('cageaid',this)" data-testid="scale-cageaid">CAGE-AID</button>
     <button class="scale-tab" onclick="showScale('columbia',this)" data-testid="scale-columbia">Columbia</button>
+    <button class="scale-tab" onclick="showScale('ymrs',this)" data-testid="scale-ymrs">YMRS</button>
+    <button class="scale-tab" onclick="showScale('aims',this)" data-testid="scale-aims">AIMS</button>
+    <button class="scale-tab" onclick="showScale('moca',this)" data-testid="scale-moca">MoCA</button>
+    <button class="scale-tab" onclick="showScale('rms',this)" data-testid="scale-rms">RMS</button>
+    <button class="scale-tab" onclick="showScale('epworth',this)" data-testid="scale-epworth">Epworth/ESS</button>
+    <button class="scale-tab" onclick="showScale('vanderbilt',this)" data-testid="scale-vanderbilt">Vanderbilt</button>
+    <button class="scale-tab" onclick="showScale('ullanlinna',this)" data-testid="scale-ullanlinna">Ullanlinna/UNS</button>
+    <button class="scale-tab" onclick="showScale('dast10',this)" data-testid="scale-dast10">DAST-10</button>
   </div>
 
   <div id="scale-container"></div>
@@ -5723,6 +5731,215 @@ const SCALES = {
       { max: 1, label: 'Passive SI (Q1 positive)', guidance: 'Passive death wish. Monitor closely. Safety plan. Address underlying psychiatric illness. Outpatient management appropriate.', cls: 'low' },
       { max: 2, label: 'Active SI without intent (Q2 positive)', guidance: 'Active suicidal ideation without plan or intent. Safety planning required. Increase monitoring frequency. Consider higher level of care if additional risk factors.', cls: 'mod' },
       { max: 5, label: 'Active SI with plan and/or intent (Q3–5 positive)', guidance: 'HIGH RISK — Immediate intervention required. Hospitalization evaluation. Do not leave patient alone. Contact crisis team. Conduct full lethality assessment. Document all interventions.', cls: 'high' }
+    ]
+  },
+  ymrs: {
+    name: 'YMRS',
+    full: 'Young Mania Rating Scale',
+    desc: 'Clinician-administered 11-item mania severity scale. Scores 0-60. Items 5,6,8,9 are double-weighted (0-8 each).',
+    instructions: 'Rate the patient symptoms over the last 48 hours. Items 5, 6, 8, and 9 are double-weighted. (0=Absent, 1-4=Increasing severity)',
+    options: ['0 - Absent', '1 - Minimal', '2 - Mild', '3 - Moderate', '4 - Severe'],
+    values: [0,1,2,3,4],
+    questions: [
+      'Elevated mood',
+      'Increased motor activity-energy',
+      'Sexual interest',
+      'Sleep (reduced need)',
+      'Irritability (double-weighted x2)',
+      'Speech rate and amount (double-weighted x2)',
+      'Language and thought disorder',
+      'Thought content (double-weighted x2)',
+      'Disruptive-aggressive behavior (double-weighted x2)',
+      'Appearance',
+      'Insight'
+    ],
+    scoring: [
+      { max: 12, label: 'No/Minimal Mania', guidance: 'Below mania threshold. Continue monitoring. May represent baseline or residual symptoms.', cls: 'low' },
+      { max: 19, label: 'Mild Mania / Hypomania', guidance: 'Mild manic symptoms. Consider treatment adjustment. Ensure mood stabilizer coverage. Reassess in 1-2 weeks.', cls: 'low' },
+      { max: 25, label: 'Moderate Mania', guidance: 'Active treatment warranted. Optimize or initiate mood stabilizer/atypical antipsychotic. Frequent monitoring. Assess safety.', cls: 'mod' },
+      { max: 60, label: 'Severe Mania', guidance: 'Intensive treatment required. Consider hospitalization. Combination therapy (mood stabilizer + antipsychotic). Safety assessment mandatory.', cls: 'high' }
+    ]
+  },
+  aims: {
+    name: 'AIMS',
+    full: 'Abnormal Involuntary Movement Scale',
+    desc: 'Clinician-administered scale for monitoring tardive dyskinesia. Baseline before antipsychotics, then every 6-12 months.',
+    instructions: 'Rate current severity of abnormal movements. Observe patient at rest, then with arm extension. Items 1-7: rate movements. Items 8-10: global ratings. (0=None, 4=Severe)',
+    options: ['0 - None', '1 - Minimal', '2 - Mild', '3 - Moderate', '4 - Severe'],
+    values: [0,1,2,3,4],
+    questions: [
+      'Facial expression muscles (forehead, eyebrows, periorbital area, cheeks)',
+      'Lips and perioral area (puckering, pouting, smacking)',
+      'Jaw (biting, clenching, chewing, lateral movement)',
+      'Tongue (rate only increase in movement; exclude tremor)',
+      'Upper extremities (arms, wrists, hands, fingers; exclude tremor)',
+      'Lower extremities (legs, knees, ankles, toes)',
+      'Trunk (neck, shoulders, hips; rocking, twisting, squirming)',
+      'Global severity of abnormal movements',
+      'Incapacitation due to abnormal movements',
+      'Patient awareness of abnormal movements'
+    ],
+    scoring: [
+      { max: 1, label: 'No Significant TD', guidance: 'No clinically significant movements. Document baseline. Routine monitoring per schedule (q6-12 months on antipsychotics).', cls: 'low' },
+      { max: 3, label: 'Minimal TD', guidance: 'Minimal movements. Increase monitoring frequency. Discuss findings with patient. Document antipsychotic dose and duration.', cls: 'low' },
+      { max: 6, label: 'Mild TD', guidance: 'Mild tardive dyskinesia. Evaluate antipsychotic necessity. Consider dose reduction. Discuss VMAT2 inhibitor (valbenazine/deutetrabenazine) if persistent.', cls: 'mod' },
+      { max: 40, label: 'Moderate-Severe TD', guidance: 'Significant tardive dyskinesia. VMAT2 inhibitor (valbenazine/deutetrabenazine) indicated. Consider antipsychotic switch to lower-TD-risk agent (quetiapine, clozapine). Neurology consult if severe.', cls: 'high' }
+    ]
+  },
+  moca: {
+    name: 'MoCA',
+    full: 'Montreal Cognitive Assessment',
+    desc: 'Clinician-administered cognitive screening. Max 30 points. More sensitive than MMSE for mild cognitive impairment. Add 1 point for education <= 12 years (cap at 30).',
+    instructions: 'Administer the standard MoCA protocol (mocatest.org). Rate each domain per official criteria. Select the score earned for each domain. Add 1 education bonus point if applicable.',
+    options: ['0 points', '1 point', '2 points', '3 points'],
+    values: [0,1,2,3],
+    questions: [
+      'Visuospatial/Executive - Trails alternating sequence (max 1)',
+      'Visuospatial/Executive - Cube copy (max 1)',
+      'Visuospatial/Executive - Clock draw: contour + numbers + hands (max 3 = rate 0-3)',
+      'Naming - 3 animals: lion, rhinoceros, camel (max 3 = rate 0-3)',
+      'Attention - Digit span forward 5 digits, backward 3 (max 2 = rate 0-2)',
+      'Attention - Letter A vigilance (max 1)',
+      'Attention - Serial 7s x5 (max 3 = rate 0-3)',
+      'Language - Repeat two sentences exactly (max 2 = rate 0-2)',
+      'Language - Letter F fluency 60 seconds (max 1)',
+      'Abstraction - Two word-pair similarities (max 2 = rate 0-2)',
+      'Delayed Recall - 5 words without cues (max 5 = rate 0-3 for display)'
+    ],
+    scoring: [
+      { max: 17, label: 'Significant Cognitive Impairment', guidance: 'Comprehensive dementia workup indicated. Assess functional capacity and safety. Neurology/neuropsychology referral. Involve family/caregivers in planning.', cls: 'high' },
+      { max: 25, label: 'Mild Cognitive Impairment', guidance: 'MCI likely. Further neuropsychological testing recommended. Rule out reversible causes (B12, TSH, depression, medication effects). Reassess at follow-up.', cls: 'mod' },
+      { max: 30, label: 'Normal Cognition', guidance: 'Normal on screening. Reassess if clinical concern persists. Note: add 1 point if education <= 12 years (capped at 30).', cls: 'low' }
+    ]
+  },
+  rms: {
+    name: 'RMS',
+    full: 'Rapid Mood Screener',
+    desc: '6-item Bipolar I screener for patients presenting with depression. Sensitivity 88%, specificity 80% at cutoff >= 4. Faster than MDQ. Use BEFORE starting antidepressants.',
+    instructions: 'Ask the patient each question about their lifetime experiences. Answer Yes or No. Administer before starting an antidepressant in any new depression presentation.',
+    options: ['No (0)', 'Yes (1)'],
+    values: [0,1],
+    questions: [
+      'Have there been at least 6 different periods (at least 2 weeks each) when you felt deeply depressed?',
+      'Did you have problems with depression before age 18?',
+      'Have you ever had to stop or change an antidepressant because it made you highly irritable or hyper?',
+      'Have you ever had a period of at least 1 week when you were more talkative than normal with racing thoughts?',
+      'Have you ever had a period of at least 1 week when you felt unusually happy, unusually outgoing, or unusually energetic?',
+      'Have you ever had a period of at least 1 week when you needed much less sleep than usual?'
+    ],
+    scoring: [
+      { max: 3, label: 'Screen Negative - Bipolar I Less Likely', guidance: 'Score 0-3: Bipolar I less likely. Proceed with unipolar depression workup. Maintain vigilance - no screener replaces thorough manic/hypomanic history.', cls: 'low' },
+      { max: 6, label: 'SCREEN POSITIVE - Bipolar I Likely', guidance: 'Score 4-6: Positive screen for Bipolar I. Full diagnostic interview for manic/hypomanic episodes BEFORE initiating antidepressant monotherapy. Mood stabilizer or atypical antipsychotic first-line if bipolar confirmed.', cls: 'high' }
+    ]
+  },
+  epworth: {
+    name: 'Epworth / ESS',
+    full: 'Epworth Sleepiness Scale',
+    desc: '8-item patient-reported excessive daytime sleepiness scale. Scores 0-24. Score > 10 = excessive daytime sleepiness requiring evaluation.',
+    instructions: 'How likely are you to DOZE OFF (not just feel tired) in the following situations in your usual daily life recently? Use the most appropriate number for each.',
+    options: ['0 - Would never doze', '1 - Slight chance of dozing', '2 - Moderate chance of dozing', '3 - High chance of dozing'],
+    values: [0,1,2,3],
+    questions: [
+      'Sitting and reading',
+      'Watching TV',
+      'Sitting inactive in a public place (theater, meeting)',
+      'As a passenger in a car for an hour without a break',
+      'Lying down to rest in the afternoon',
+      'Sitting and talking to someone',
+      'Sitting quietly after lunch (no alcohol)',
+      'In a car stopped for a few minutes in traffic'
+    ],
+    scoring: [
+      { max: 5, label: 'Lower Normal Daytime Sleepiness', guidance: 'Normal range. No intervention indicated.', cls: 'low' },
+      { max: 10, label: 'Higher Normal Daytime Sleepiness', guidance: 'Within normal range. Address sleep hygiene if symptomatic.', cls: 'low' },
+      { max: 12, label: 'Mild Excessive Daytime Sleepiness', guidance: 'Screen for insufficient sleep, OSA risk (snoring, witnessed apneas, BMI, neck circumference), and medication sedation. Consider sleep study referral.', cls: 'mod' },
+      { max: 15, label: 'Moderate Excessive Daytime Sleepiness', guidance: 'Sleep study referral warranted. Review sedating psychotropics. Assess and document driving safety counseling.', cls: 'mod' },
+      { max: 24, label: 'Severe Excessive Daytime Sleepiness', guidance: 'Expedited sleep medicine referral for OSA/narcolepsy workup. Document driving safety counseling. Review full medication list for sedative burden. Pair with Ullanlinna scale if narcolepsy suspected.', cls: 'high' }
+    ]
+  },
+  vanderbilt: {
+    name: 'Vanderbilt',
+    full: 'NICHQ Vanderbilt Assessment (Parent Form)',
+    desc: 'Pediatric ADHD screening for ages 6-12. 18 core symptom items rated by parent. Requires teacher version for cross-setting confirmation. Official scoring: count items rated 2-3.',
+    instructions: 'Rate the child behavior over the last 6 months. OFFICIAL SCORING: Count items 1-9 rated 2 or 3 for inattentive subtype; count items 10-18 rated 2 or 3 for hyperactive/impulsive subtype. Need >= 6 in either subscale. Total score is an approximation only.',
+    options: ['0 - Never', '1 - Occasionally', '2 - Often', '3 - Very Often'],
+    values: [0,1,2,3],
+    questions: [
+      'Does not pay attention to details or makes careless mistakes with schoolwork',
+      'Has difficulty keeping attention on tasks or activities',
+      'Does not seem to listen when spoken to directly',
+      'Does not follow through on instructions; fails to finish schoolwork or chores',
+      'Has difficulty organizing tasks and activities',
+      'Avoids or is reluctant to do tasks requiring sustained mental effort',
+      'Loses things necessary for tasks (pencils, books, assignments)',
+      'Is easily distracted by outside stimuli',
+      'Is forgetful in daily activities',
+      'Fidgets or squirms in seat - HYPERACTIVE items below',
+      'Leaves seat when remaining seated is expected',
+      'Runs about or climbs in situations where inappropriate',
+      'Has difficulty playing quietly',
+      'Is on the go or acts as if driven by a motor',
+      'Talks too much',
+      'Blurts out answers before questions are completed',
+      'Has difficulty waiting their turn',
+      'Interrupts or intrudes on others'
+    ],
+    scoring: [
+      { max: 17, label: 'Low Symptom Burden', guidance: 'Low total. Verify with counting rule: count items 1-9 rated 2-3 (inattentive) and items 10-18 rated 2-3 (hyperactive). Obtain teacher form for cross-setting assessment.', cls: 'low' },
+      { max: 35, label: 'Moderate Symptom Burden', guidance: 'Apply counting rule: 6+ of items 1-9 = inattentive subtype; 6+ of items 10-18 = hyperactive subtype. Assess performance/impairment items. Teacher form REQUIRED for diagnosis.', cls: 'mod' },
+      { max: 54, label: 'High Symptom Burden - Likely Positive', guidance: 'Likely positive screen. Confirm with counting rule, obtain teacher form, review impairment items, and complete full diagnostic evaluation. Rule out anxiety, ODD, and learning disabilities.', cls: 'high' }
+    ]
+  },
+  ullanlinna: {
+    name: 'Ullanlinna / UNS',
+    full: 'Ullanlinna Narcolepsy Scale',
+    desc: '11-item narcolepsy screener. Scores 0-44. Cutoff >= 14 (sensitivity 100%, specificity 98.8%). Items 1-4 = cataplexy factor. Items 5-11 = abnormal sleep tendency.',
+    instructions: 'Rate how frequently each symptom occurs. Items 1-4 assess cataplexy (muscle weakness triggered by emotion - nearly pathognomonic for narcolepsy type 1). Items 5-11 assess sleep tendency.',
+    options: ['0 - Never / >40 min', '1 - Rarely / 31-40 min', '2 - Monthly / 21-30 min', '3 - Weekly / 10-20 min', '4 - Daily or almost daily / <10 min'],
+    values: [0,1,2,3,4],
+    questions: [
+      'CATAPLEXY: When laughing, do your knees buckle or give way?',
+      'CATAPLEXY: When angry or in a sudden emotional situation, do your knees buckle?',
+      'CATAPLEXY: In emotional situations, does your mouth open or jaw drop involuntarily?',
+      'CATAPLEXY: In emotional situations, have you actually fallen due to muscle weakness?',
+      'SLEEP TENDENCY: How quickly do you fall asleep at night? (faster = higher score)',
+      'SLEEP TENDENCY: Do you fall asleep during the day when not intending to?',
+      'SLEEP TENDENCY: Do you fall asleep in passive situations (reading, TV, as passenger)?',
+      'SLEEP TENDENCY: Do you need to actively fight off sleep during the day?',
+      'SLEEP TENDENCY: Do you take naps during the day?',
+      'SLEEP TENDENCY: Does unwanted sleep occur in unusual or inappropriate situations?',
+      'SLEEP TENDENCY: How strong is your daytime sleep tendency overall compared to others?'
+    ],
+    scoring: [
+      { max: 13, label: 'Below Narcolepsy Threshold', guidance: 'Narcolepsy less likely. If EDS persists, evaluate for OSA, insufficient sleep, circadian disorders, or medication sedation. Pair with Epworth Scale.', cls: 'low' },
+      { max: 44, label: 'POSITIVE SCREEN - Narcolepsy Likely', guidance: 'Score >= 14: Suggestive of narcolepsy. Refer to sleep medicine for polysomnography + MSLT. Ask about sleep paralysis, hypnagogic hallucinations, and fragmented night sleep. Do NOT start stimulants without confirmatory testing.', cls: 'high' }
+    ]
+  },
+  dast10: {
+    name: 'DAST-10',
+    full: 'Drug Abuse Screening Test (10-item)',
+    desc: 'Screens for drug use disorder (non-alcohol) over past 12 months. Includes prescription drug misuse. Score >= 3 = clinically significant. Use AUDIT for alcohol.',
+    instructions: 'Questions concern involvement with drugs (NOT including alcohol) during the past 12 months. This includes non-medical use of prescription medications. Answer Yes or No.',
+    options: ['No (0)', 'Yes (1)'],
+    values: [0,1],
+    questions: [
+      'Have you used drugs other than those required for medical reasons?',
+      'Do you use more than one drug at a time?',
+      'Have you been unable to stop using drugs when you wanted to?',
+      'Have you had blackouts or flashbacks as a result of drug use?',
+      'Have you felt bad or guilty about your drug use?',
+      'Does your spouse, partner, or family complain about your involvement with drugs?',
+      'Have you neglected your family because of your use of drugs?',
+      'Have you engaged in illegal activities in order to obtain drugs?',
+      'Have you experienced withdrawal symptoms when you stopped taking drugs?',
+      'Have you had medical problems as a result of drug use (memory loss, hepatitis, convulsions)?'
+    ],
+    scoring: [
+      { max: 0, label: 'No Problems Reported', guidance: 'Score 0: No drug problems reported. Reassess periodically.', cls: 'low' },
+      { max: 2, label: 'Low Level', guidance: 'Score 1-2: Low-level drug involvement. Brief advice and monitoring. Explore further in clinical interview.', cls: 'low' },
+      { max: 5, label: 'Moderate Level', guidance: 'Score 3-5: Moderate drug involvement. Full SUD assessment per DSM-5 warranted. Brief intervention with MI. Consider UDS (with consent). Review PDMP.', cls: 'mod' },
+      { max: 8, label: 'Substantial Level', guidance: 'Score 6-8: Substantial drug involvement. SUD treatment referral (outpatient/IOP). Address with motivational interviewing. Coordinate controlled-substance prescribing decisions.', cls: 'high' },
+      { max: 10, label: 'Severe Level', guidance: 'Score 9-10: Severe drug involvement. IOP or residential referral. Assess withdrawal risk and medical stabilization. Consider Marchman Act if imminent danger and refusing care.', cls: 'high' }
     ]
   }
 };
