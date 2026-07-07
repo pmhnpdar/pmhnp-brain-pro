@@ -3819,6 +3819,16 @@ body.light .section-divider h2 { color: #0f1a2e; }
 .sub-tab.active { background:rgba(56,178,212,0.15); color:var(--accent); border-color:rgba(56,178,212,0.3); }
 .sub-content { display:none; }
 .active-sub { display:block; width:100%; box-sizing:border-box; }
+
+.specialty-content { display:none; }
+.specialty-content.active-specialty { display:block; }
+
+/* ── PREVENT LAYOUT JUMP ON TAB SWITCH ─────────── */
+.disorder-nav + * { min-height: 0; }
+.sub-content.active-sub { min-height: 200px; }
+.specialty-content.active-specialty { min-height: 200px; }
+.scale-container { min-height: 400px; }
+.disorder-content.active { min-height: 200px; }
 </style>
 
 
@@ -4920,7 +4930,7 @@ function showPage(id, navEl) {
   // Hide all pages via class (consistent — no inline style conflicts)
   document.querySelectorAll('.page').forEach(p => {
     p.classList.remove('active-page');
-    p.style.display = '';   // clear any residual inline style
+    // class-based only
   });
   const page = document.getElementById(id);
   if (page) page.classList.add('active-page');
@@ -5000,10 +5010,10 @@ function openDecisionTool() {
 
 // ── SPECIALTIES ──────────────────────────────────────
 function showSpecialty(id, btn) {
-  document.querySelectorAll('.specialty-content').forEach(c => c.style.display = 'none');
-  document.querySelectorAll('.specialty-tab').forEach(b => b.classList.remove('active'));
-  const content = document.getElementById('specialty-' + id);
-  if (content) content.style.display = 'block';
+  document.querySelectorAll('.specialty-content').forEach(c => c.classList.remove('active-specialty'));
+  document.querySelectorAll('.specialty-tab').forEach(t => t.classList.remove('active'));
+  const panel = document.getElementById('specialty-' + id);
+  if (panel) panel.classList.add('active-specialty');
   if (btn) btn.classList.add('active');
 }
 
@@ -5011,10 +5021,7 @@ function showSpecialty(id, btn) {
 function showSubtab(pageId, tabId) {
   const page = document.getElementById('page-' + pageId);
   if (!page) return;
-  page.querySelectorAll('.sub-content').forEach(c => {
-    c.classList.remove('active-sub');
-    c.style.display = '';
-  });
+  page.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active-sub'));
   page.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
   const panel = document.getElementById(pageId + '-' + tabId);
   if (panel) panel.classList.add('active-sub');
