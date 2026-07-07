@@ -2358,7 +2358,7 @@ body.light .section-divider h2 { color: #0f1a2e; }
   <div class="page-badge">Prescribing Reference</div>
   <div class="page-header">
     <h1 class="page-title">Medications</h1>
-    <p class="page-subtitle">83 medications — searchable, filterable, side-by-side comparison</p>
+    <p class="page-subtitle" id="meds-page-subtitle">Medications — searchable, filterable, side-by-side comparison</p>
     <div class="disclaimer-bar">For licensed healthcare providers only. Educational use only. Not medical advice.</div>
   </div>
 
@@ -5541,6 +5541,8 @@ function renderMeds() {
   if (typeof MEDS === 'undefined') return;
   const grid = document.getElementById('med-grid');
   const countEl = document.getElementById('med-count');
+  const subtitleEl = document.getElementById('meds-page-subtitle');
+  if (subtitleEl) subtitleEl.textContent = `${MEDS.length} medications — searchable, filterable, side-by-side comparison`;
   if (!grid) return;
 
   let filtered = MEDS;
