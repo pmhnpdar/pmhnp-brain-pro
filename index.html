@@ -800,7 +800,7 @@ body.light .med-pearl { background: rgba(245,166,35,0.1); }
 body.light .filter-btn { color: #3d4f6e; border-color: rgba(0,0,0,0.15); }
 body.light .filter-btn.active { background: var(--accent); color: #fff; }
 body.light .med-search-wrap input { background: #ffffff; color: #0f1a2e; border-color: rgba(0,0,0,0.15); }
-body.light .note-builder { background: #ffffff; border-color: rgba(0,0,0,0.08); }
+body.light body.light .note-builder { background: #ffffff; border-color: rgba(0,0,0,0.08); }
 body.light .note-field input, body.light .note-field textarea, body.light .note-field select { background: #f4f6fb; color: #0f1a2e; border-color: rgba(0,0,0,0.15); }
 body.light .page-badge {
   color: #1a7a9a;
@@ -3818,7 +3818,7 @@ body.light .section-divider h2 { color: #0f1a2e; }
 .sub-tab:hover { border-color:var(--border); color:var(--text-primary); }
 .sub-tab.active { background:rgba(56,178,212,0.15); color:var(--accent); border-color:rgba(56,178,212,0.3); }
 .sub-content { display:none; }
-.active-sub { display:block; }
+.active-sub { display:block; width:100%; box-sizing:border-box; }
 </style>
 
 
@@ -5011,18 +5011,15 @@ function showSpecialty(id, btn) {
 function showSubtab(pageId, tabId) {
   const page = document.getElementById('page-' + pageId);
   if (!page) return;
-  page.querySelectorAll('.sub-content').forEach(c => { c.style.display = 'none'; c.classList.remove('active-sub'); });
+  page.querySelectorAll('.sub-content').forEach(c => {
+    c.classList.remove('active-sub');
+    c.style.display = '';
+  });
   page.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
-  const content = document.getElementById(pageId + '-' + tabId);
-  if (content) { content.style.display = 'block'; content.classList.add('active-sub'); }
-  const tab = page.querySelector('[onclick*="' + tabId + '"]');
-  if (tab) tab.classList.add('active');
-
-  // Lazy-render supplements on first open
-  if (tabId === 'supps' && !window._suppsRendered) {
-    renderSupplements();
-    window._suppsRendered = true;
-  }
+  const panel = document.getElementById(pageId + '-' + tabId);
+  if (panel) panel.classList.add('active-sub');
+  const btn = page.querySelector('.sub-tab[onclick*="' + tabId + '"]');
+  if (btn) btn.classList.add('active');
 }
 
 // ── DECISION TOOLS ───────────────────────────────────
